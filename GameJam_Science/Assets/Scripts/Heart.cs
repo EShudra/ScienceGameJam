@@ -15,57 +15,57 @@ public class Heart : Interactive {
 	void Update () {										/* Object movement */
 		RaycastHit2D hit;
 
-		if (Input.GetKey (KeyCode.LeftArrow) && Input.GetKey (KeyCode.DownArrow)) { 		//Left+Down
-			Debug.Log ("Diagonal Left+Down");
+		if ((Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) && (Input.GetKey (KeyCode.DownArrow) || Input.GetKey (KeyCode.S))) { 		//Left+Down
+			//Debug.Log ("Diagonal Left+Down pressed.");
 
 			if (!isMoving)
 				if (Move (-step, -step, out hit))
 					AttemptMove<Component> (-step, -step);
 			
-		} else if (Input.GetKey (KeyCode.UpArrow) && Input.GetKey (KeyCode.RightArrow)) { 	//Up+Right
-			Debug.Log ("Diagonal Up+Right");
+		} else if ((Input.GetKey (KeyCode.UpArrow) || Input.GetKey (KeyCode.W)) && (Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D))) { 	//Up+Right
+			//Debug.Log ("Diagonal Up+Right pressed.");
 
 			if (!isMoving) 
 				if (Move (step, step, out hit))
 					AttemptMove<Component> (step, step);
 		
-		} else if (Input.GetKey (KeyCode.UpArrow) && Input.GetKey (KeyCode.LeftArrow)) {	//Up+Left
-			Debug.Log ("Diagonal Up+Left");
+		} else if ((Input.GetKey (KeyCode.UpArrow) || Input.GetKey (KeyCode.W)) && (Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A))) {	//Up+Left
+			//Debug.Log ("Diagonal Up+Left pressed.");
 
 			if (!isMoving) 
 				if (Move (-step, step, out hit))
 					AttemptMove<Component> (-step, step);
 			
-		} else if (Input.GetKey (KeyCode.DownArrow) && Input.GetKey (KeyCode.RightArrow)) {	//Down+Right
-			Debug.Log ("Diagonal Down+Right");
+		} else if ((Input.GetKey (KeyCode.DownArrow) || Input.GetKey (KeyCode.S)) && (Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D))) {	//Down+Right
+			//Debug.Log ("Diagonal Down+Right pressed.");
 
 			if (!isMoving) 
 				if (Move (step, -step, out hit))
 					AttemptMove<Component> (step, -step);
 			
-		} else if (Input.GetKey(KeyCode.LeftArrow)) {										//Left
-			Debug.Log ("Left key was pressed.");
+		} else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) {																		//Left
+			//Debug.Log ("Left key was pressed.");
 
 			if (!isMoving) 
 				if (Move (-step, 0, out hit))
 					AttemptMove<Component> (-step, 0);
 			
-		} else if (Input.GetKey(KeyCode.RightArrow)) {										//Right
-			Debug.Log ("Right key was pressed.");
+		} else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) {																		//Right
+			//Debug.Log ("Right key was pressed.");
 
 			if (!isMoving) 
 				if (Move (step, 0, out hit))
 					AttemptMove<Component> (step, 0);
 			
-		} else if (Input.GetKey(KeyCode.UpArrow)) {											//Up
-			Debug.Log ("Up key was pressed.");
+		} else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey (KeyCode.W)) {																			//Up
+			//Debug.Log ("Up key was pressed.");		
 
 			if (!isMoving) 
 				if (Move (0, step, out hit))
 					AttemptMove<Component> (0, step);
 			
-		} else if (Input.GetKey(KeyCode.DownArrow)) {										//Down
-			Debug.Log ("Down key was pressed.");
+		} else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey (KeyCode.S)) {																		//Down
+			//Debug.Log ("Down key was pressed.");
 
 			if (!isMoving) 
 				if (Move (0, -step, out hit))
