@@ -7,22 +7,25 @@ public class Heart : Interactive {
 
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		int horizontal = 0;
-		int vertical = 0;
-
-		horizontal = (int)Input.GetAxisRaw ("Horizontal");
-		vertical = (int)Input.GetAxisRaw ("Vertical");
-
-
+		if (Input.GetKeyDown (KeyCode.UpArrow)) {
+			Debug.Log ("Up key was pressed.");
+		} else if (Input.GetKeyDown (KeyCode.DownArrow)) {
+			Debug.Log ("Down key was pressed.");
+		} else if (Input.GetKeyDown (KeyCode.LeftArrow)){
+			Debug.Log ("Left key was pressed.");
+		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
+			Debug.Log ("Right key was pressed.");
+		}
 	}
 
-	/*protected override void AttemmptMove<T>(float deltaX, float deltaY){
+	protected override void OnCantMove<T> (T component){}
 
-	}*/
+	protected override void OnHit (string tag){
+		slime -= 2;
+	}
 }
