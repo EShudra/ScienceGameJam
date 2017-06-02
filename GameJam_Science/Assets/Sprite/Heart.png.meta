@@ -47,6 +47,7 @@ TextureImporter:
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
+argetSettings: []
   buildTargetSettings:
   - buildTarget: Standalone
     maxTextureSize: 128
