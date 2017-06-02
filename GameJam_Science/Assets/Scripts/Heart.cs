@@ -4,7 +4,7 @@ using System.Collections;
 public class Heart : Interactive {
 
 	private int slime = 100;
-	private float step = 0.5f;
+	public float step = 0.5f;
 
 	// Use this for initialization
 	protected override void Start () {
