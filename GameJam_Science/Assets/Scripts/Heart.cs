@@ -121,9 +121,9 @@ public class Heart : Interactive {
 		}
 	}
 
-	protected override void OnCantMove<T> (T component){}
+	public override void OnCantMove<T> (T component){}
 
-	protected override void OnHit (string tag){
+	public override void OnHit (string tag){
 		slime -= 2;
 	}
 }
