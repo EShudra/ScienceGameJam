@@ -4,7 +4,7 @@ using System.Collections;
 public class Heart : Interactive {
 
 	private int slime = 100;
-	private int step = 1;
+	private float step = 0.5f;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -12,48 +12,112 @@ public class Heart : Interactive {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () {										/* Object movement */
 		RaycastHit2D hit;
 
-		if (Input.GetKeyDown (KeyCode.UpArrow)) {
-			Debug.Log ("Up key was pressed.");
+		if (Input.GetKey (KeyCode.LeftArrow) && Input.GetKey (KeyCode.DownArrow)) { 		//Left+Down
+			Debug.Log ("Diagonal Left+Down");
 
-			while (Input.GetKey (KeyCode.UpArrow)) {
-				if (Move (0, step, out hit))
-					AttemptMove<Component> (0, step);
-				if (Input.GetKeyUp (KeyCode.UpArrow))
-					break;
+			if (!isMoving) {
+				if (Move (-step, -step, out hit)) {
+					AttemptMove<Component> (-step, -step);
+					isMoving = true;
+				}
 			}
-			
-		} else if (Input.GetKeyDown (KeyCode.DownArrow)) {
-			Debug.Log ("Down key was pressed.");
 
-			while (Input.GetKey (KeyCode.DownArrow)) {
-				if (Move (0, -step, out hit))
-					AttemptMove<Component> (0, -step);
-				if (Input.GetKeyUp (KeyCode.DownArrow))
-					break;
-			}
+			if (Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp (KeyCode.DownArrow))
+				isMoving = false;
 			
-		} else if (Input.GetKeyDown (KeyCode.LeftArrow)){
+		} else if (Input.GetKey (KeyCode.UpArrow) && Input.GetKey (KeyCode.RightArrow)) { 	//Up+Right
+			Debug.Log ("Diagonal Up+Right");
+
+			if (!isMoving) {
+				if (Move (step, step, out hit)) {
+					AttemptMove<Component> (step, step);
+					isMoving = true;
+				}
+			}
+
+			if (Input.GetKeyUp (KeyCode.UpArrow) || Input.GetKeyUp (KeyCode.RightArrow))
+				isMoving = false;
+		
+		} else if (Input.GetKey (KeyCode.UpArrow) && Input.GetKey (KeyCode.LeftArrow)) {	//Up+Left
+			Debug.Log ("Diagonal Up+Left");
+
+			if (!isMoving) {
+				if (Move (-step, step, out hit)) {
+					AttemptMove<Component> (-step, step);
+					isMoving = true;
+				}
+			}
+
+			if (Input.GetKeyUp (KeyCode.UpArrow) || Input.GetKeyUp (KeyCode.LeftArrow))
+				isMoving = false;
+			
+		} else if (Input.GetKey (KeyCode.DownArrow) && Input.GetKey (KeyCode.RightArrow)) {	//Down+Right
+			Debug.Log ("Diagonal Down+Right");
+
+			if (!isMoving) {
+				if (Move (step, -step, out hit)) {
+					AttemptMove<Component> (step, -step);
+					isMoving = true;
+				}
+			}
+
+			if (Input.GetKeyUp (KeyCode.DownArrow) || Input.GetKeyUp (KeyCode.RightArrow))
+				isMoving = false;
+			
+		} else if (Input.GetKey(KeyCode.LeftArrow)) {										//Left
 			Debug.Log ("Left key was pressed.");
 
-			while (Input.GetKey (KeyCode.LeftArrow)) {
-				if (Move (-step, 0, out hit))
+			if (!isMoving) {
+				if (Move (-step, 0, out hit)) {
 					AttemptMove<Component> (-step, 0);
-				if (Input.GetKeyUp (KeyCode.LeftArrow))
-					break;
+					isMoving = true;
+				}
 			}
-			
-		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
+
+			if (Input.GetKeyUp (KeyCode.LeftArrow))
+				isMoving = false;
+
+		} else if (Input.GetKey(KeyCode.RightArrow)) {										//Right
 			Debug.Log ("Right key was pressed.");
 
-			while (Input.GetKey (KeyCode.RightArrow)) {
-				if (Move (step, 0, out hit))
+			if (!isMoving) {
+				if (Move (step, 0, out hit)) {
 					AttemptMove<Component> (step, 0);
-				if (Input.GetKeyUp (KeyCode.RightArrow))
-					break;
+					isMoving = true;
+				}
 			}
+
+			if (Input.GetKeyUp (KeyCode.RightArrow))
+				isMoving = false;
+		
+		} else if (Input.GetKey(KeyCode.UpArrow)) {											//Up
+			Debug.Log ("Up key was pressed.");
+
+			if (!isMoving) {
+				if (Move (0, step, out hit)) {
+					AttemptMove<Component> (0, step);
+					isMoving = true;
+				}
+			}
+
+			if (Input.GetKeyUp (KeyCode.UpArrow))
+				isMoving = false;
+
+		} else if (Input.GetKey(KeyCode.DownArrow)) {										//Down
+			Debug.Log ("Down key was pressed.");
+
+			if (!isMoving) {
+				if (Move (0, -step, out hit)) {
+					AttemptMove<Component> (0, -step);
+					isMoving = true;
+				}
+			}
+
+			if (Input.GetKeyUp (KeyCode.DownArrow))
+				isMoving = false;
 		}
 	}
 
