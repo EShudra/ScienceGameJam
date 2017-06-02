@@ -7,6 +7,8 @@
 /[Bb]uilds/
 /[Ll]ibrary/
 Library/
+!/[Ll]ibrary/ProjectSettings.asset
+![Ll]ibrary/ProjectSettings.asset
 Temp/
 sysinfo.txt
 *.stackdump
@@ -47,4 +49,4 @@ Corridor/Library/ShaderCache/
 Corridor/Library/metadata/
 UnityLockfile
 ururu/
-!ProjectSettings.asset
+
