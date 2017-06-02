@@ -22,7 +22,7 @@ public class Heart : Interactive {
 
 	}
 
-	protected override void AttemmptMove<T>(float deltaX, float deltaY){
+	/*protected override void AttemmptMove<T>(float deltaX, float deltaY){
 
-	}
+	}*/
 }
