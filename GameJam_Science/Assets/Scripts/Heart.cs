@@ -7,7 +7,7 @@ public class Heart : Interactive {
 	public float step = 0.5f;
 
 	// Use this for initialization
-	protected override void Start () {
+	public override void Start () {
 		base.Start ();
 	}
 	
