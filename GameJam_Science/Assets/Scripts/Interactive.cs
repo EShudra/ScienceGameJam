@@ -8,12 +8,12 @@ public abstract class Interactive : MonoBehaviour {
 	private Rigidbody2D rb2D;
 	public bool isMoving = false; //true if object is moving
 
-	protected virtual void Start(){
+	public virtual void Start(){
 		boxCollider = GetComponent <BoxCollider2D> ();
 		rb2D = GetComponent <Rigidbody2D> ();
 	}
 
-	protected bool Move(float deltaX, float deltaY, out RaycastHit2D hit){
+	public bool Move(float deltaX, float deltaY, out RaycastHit2D hit){
 		Vector2 start = transform.position; 
 		Vector2 end = start + new Vector2(deltaX,deltaY); //calculating new position
 
@@ -41,14 +41,14 @@ public abstract class Interactive : MonoBehaviour {
 	}
 
 
-	protected void AttemptMove<T>(float deltaX, float deltaY)
+	public bool AttemptMove<T>(float deltaX, float deltaY)
 		where T: Component
 	{
 		RaycastHit2D hit;
 		bool canMove = Move (deltaX, deltaY, out hit);
 
 		if (hit.transform == null) { //do nothing if collide nothing
-			return;	
+			return canMove;	
 		}
 
 		T hitComponent = hit.transform.GetComponent<T> ();
@@ -56,14 +56,15 @@ public abstract class Interactive : MonoBehaviour {
 		if (!canMove && hitComponent != null) { 
 			OnCantMove(hitComponent);
 		}
+		return canMove;	
 	}
 
-	protected abstract void OnCantMove<T>(T component)
+	public abstract void OnCantMove<T>(T component)
 		where T: Component;
 		//BODY FOR INTERACTIVE ELEMENTS
 		/*Interactive hitObj = component as Interactive; //interpretate component which hits as interactive and call OnHit() method of obj
 		hitObj.OnHit (this.tag);*/
 
-	protected abstract void OnHit (string tag);
+	public abstract void OnHit (string tag);
 
 }
