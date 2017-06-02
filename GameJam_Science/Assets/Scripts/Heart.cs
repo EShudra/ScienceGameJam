@@ -18,30 +18,42 @@ public class Heart : Interactive {
 		if (Input.GetKeyDown (KeyCode.UpArrow)) {
 			Debug.Log ("Up key was pressed.");
 
-			while (Input.GetKey (KeyCode.UpArrow))
+			while (Input.GetKey (KeyCode.UpArrow)) {
 				if (Move (0, step, out hit))
 					AttemptMove<Component> (0, step);
+				if (Input.GetKeyUp (KeyCode.UpArrow))
+					break;
+			}
 			
 		} else if (Input.GetKeyDown (KeyCode.DownArrow)) {
 			Debug.Log ("Down key was pressed.");
 
-			while (Input.GetKey (KeyCode.DownArrow))
+			while (Input.GetKey (KeyCode.DownArrow)) {
 				if (Move (0, -step, out hit))
 					AttemptMove<Component> (0, -step);
+				if (Input.GetKeyUp (KeyCode.DownArrow))
+					break;
+			}
 			
 		} else if (Input.GetKeyDown (KeyCode.LeftArrow)){
 			Debug.Log ("Left key was pressed.");
 
-			while (Input.GetKey (KeyCode.LeftArrow))
+			while (Input.GetKey (KeyCode.LeftArrow)) {
 				if (Move (-step, 0, out hit))
 					AttemptMove<Component> (-step, 0);
+				if (Input.GetKeyUp (KeyCode.LeftArrow))
+					break;
+			}
 			
 		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
 			Debug.Log ("Right key was pressed.");
 
-			while (Input.GetKey (KeyCode.RightArrow))
+			while (Input.GetKey (KeyCode.RightArrow)) {
 				if (Move (step, 0, out hit))
 					AttemptMove<Component> (step, 0);
+				if (Input.GetKeyUp (KeyCode.RightArrow))
+					break;
+			}
 		}
 	}
 
