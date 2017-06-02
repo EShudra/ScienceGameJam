@@ -1,23 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Heart.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Interactive.cs">
     <Files>
-      <File FileName="Assets\Scripts\Interactive.cs" Line="11" Column="2" />
-      <File FileName="Assets\Scripts\Heart.cs" Line="10" Column="3" />
+      <File FileName="Assets\Scripts\Interactive.cs" Line="37" Column="67" />
+      <File FileName="Assets\Scripts\Heart.cs" Line="26" Column="54" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="GameJam_Science" expanded="True">
-            <Node name="Assembly-CSharp" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="Heart.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
