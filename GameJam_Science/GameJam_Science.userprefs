@@ -1,9 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Interactive.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Heart.cs">
     <Files>
-      <File FileName="Assets\Scripts\Interactive.cs" Line="37" Column="67" />
-      <File FileName="Assets\Scripts\Heart.cs" Line="26" Column="54" />
+      <File FileName="Assets\Scripts\Interactive.cs" Line="20" Column="1" />
+      <File FileName="Assets\Scripts\Heart.cs" Line="7" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
