@@ -7,6 +7,8 @@
 /[Bb]uilds/
 /[Ll]ibrary/
 Library/
+!/[Ll]ibrary/ProjectSettings.asset
+![Ll]ibrary/ProjectSettings.asset
 Temp/
 sysinfo.txt
 *.stackdump
@@ -21,12 +23,13 @@ sysinfo.txt
 .vs/
 /*.userprefs
 /*.csproj
+*.csproj
 /*.pidb
 *.pidb.meta
 /*.suo
 /*.sln*
 /*.user
-/*.unityproj
+#/*.unityproj
 /*.booproj
 .consulo/
 /*.tmp
@@ -47,3 +50,4 @@ Corridor/Library/ShaderCache/
 Corridor/Library/metadata/
 UnityLockfile
 ururu/
+
