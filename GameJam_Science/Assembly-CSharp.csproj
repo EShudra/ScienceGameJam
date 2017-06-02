@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\HowToWinGameJam.cs" />
-     <Compile Include="Assets\Scripts\MovingObject.cs" />
      <Compile Include="Assets\test.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Programs/Unity3D_5.4.4f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
