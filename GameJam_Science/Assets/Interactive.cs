@@ -14,4 +14,8 @@ public abstract class Interactive : MonoBehaviour {
 
 	}
 
+	protected void OnHit(string tag){
+		
+	}
+
 }
