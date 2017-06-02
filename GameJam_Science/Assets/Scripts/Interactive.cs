@@ -64,8 +64,6 @@ public abstract class Interactive : MonoBehaviour {
 		/*Interactive hitObj = component as Interactive; //interpretate component which hits as interactive and call OnHit() method of obj
 		hitObj.OnHit (this.tag);*/
 
-
-
 	protected void OnHit(string tag){
 		
 	}
