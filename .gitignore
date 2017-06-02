@@ -23,6 +23,7 @@ sysinfo.txt
 .vs/
 /*.userprefs
 /*.csproj
+*.csproj
 /*.pidb
 *.pidb.meta
 /*.suo
