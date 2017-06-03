@@ -2,19 +2,20 @@
 using System.Collections;
 
 public class CameraBehaviour : MonoBehaviour {
-
-	public Heart player;
+	public Transform target;
+	public float smoothing = 5f;
 
 	private Vector3 offset;
 
 	// Use this for initialization
 	void Start () {
-		player = GetComponent <Heart> ();
-		offset = this.transform.position - player.transform.position;
+		
+		offset = transform.position - target.position;
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
-		this.transform.position = player.transform.position + offset;
+		Vector3 targetCameraPosition = target.position + offset;
+		transform.position = Vector3.Lerp (transform.position,targetCameraPosition,smoothing * Time.deltaTime);
 	}
 }
