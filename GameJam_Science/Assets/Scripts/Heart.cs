@@ -72,5 +72,6 @@ public class Heart : Interactive {
 
 	public override void OnHit (string tag){
 		slime -= 2;
+		Debug.Log (slime);
 	}
 }
