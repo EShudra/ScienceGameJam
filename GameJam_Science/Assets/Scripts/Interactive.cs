@@ -4,8 +4,8 @@ using System.Collections;
 public abstract class Interactive : MonoBehaviour {
 
 	public float movSpeed = 5;
-	private BoxCollider2D boxCollider;
-	private Rigidbody2D rb2D;
+	public BoxCollider2D boxCollider;
+	public Rigidbody2D rb2D;
 	public bool isMoving = false; //true if object is moving
 
 	public virtual void Start(){
