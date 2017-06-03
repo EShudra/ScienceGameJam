@@ -4,7 +4,6 @@ using System.Collections;
 public class Heart : Interactive {
 
 	private int slime = 100;
-	public float heartSpeed = 7;
 
 	Vector3 destination;
 	public float shootingResetTime = 0.07f;
@@ -16,7 +15,8 @@ public class Heart : Interactive {
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
-		movSpeed = heartSpeed;
+		step = movSpeed / 100;
+
 		//GameObject slimeBullet = Resources.Load ("Prefabs/slimeBullet") as GameObject; 
 		//Debug.Log (slimeBullet);
 	}
@@ -70,8 +70,9 @@ public class Heart : Interactive {
 
 	public override void OnCantMove<T> (T component){}
 
-	public override void OnHit (string tag){
-		slime -= 2;
-		Debug.Log (slime);
+	public override void OnHit (GameObject collideObject){
+
+		slime--;
+		Debug.Log (string.Format("heart slime: {0}",slime));
 	}
 }
