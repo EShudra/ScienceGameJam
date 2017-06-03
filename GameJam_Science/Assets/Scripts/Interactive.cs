@@ -7,6 +7,7 @@ public abstract class Interactive : MonoBehaviour {
 	public BoxCollider2D boxCollider;
 	public Rigidbody2D rb2D;
 	public bool isMoving = false; //true if object is moving
+	public float step = 0.007f;
 
 	public virtual void Start(){
 		boxCollider = GetComponent <BoxCollider2D> ();
@@ -17,11 +18,20 @@ public abstract class Interactive : MonoBehaviour {
 		Vector2 start = transform.position; 
 		Vector2 end = start + new Vector2(deltaX,deltaY); //calculating new position
 
-		boxCollider.enabled = false;
+		/*boxCollider.enabled = false;
 		hit = Physics2D.Linecast (start, end);
-		boxCollider.enabled = true; //checking collisions
+		boxCollider.enabled = true; //checking collisions*/
 
-		if (hit.transform == null) {//if hits nothing then move
+		RaycastHit2D[] castResult = new RaycastHit2D[4];
+		boxCollider.Cast(end-start, castResult, step*2);
+
+		/*if (hit.transform == null) {//if hits nothing then move
+			StartCoroutine(SmoothMovement(end));
+			return true;
+		}*/
+		hit = castResult [0];
+
+		if (castResult[0].collider == null) {
 			StartCoroutine(SmoothMovement(end));
 			return true;
 		}
