@@ -13,24 +13,9 @@ public class Bullet : Interactive {
 		cam = GameObject.FindObjectOfType<Camera> ();
 		target = cam.ScreenToWorldPoint (Input.mousePosition);
 		target.z = 0;
-		//this.transform.rotation = Quaternion.LookRotation ((target - this.transform.position).normalized);
 		Quaternion rotation = Quaternion.LookRotation ((target - this.transform.position));
-		//rotation.y = 0;
-		//rotation.x = 0;
-
-		//rotation = Quaternion.Euler(0,0,Quaternion.LookRotation ((target - this.transform.position).normalized).eulerAngles.z);
-		//Debug.Log(rotation.eulerAngles);
-		//rotation.
-		//rotation.eulerAngles. = new Vector3 (rotation.eulerAngles.x, 0, 0);
-		//Debug.Log(rotation.eulerAngles);
-		//rotation.eulerAngles.y = 0;
-		//rotation.eulerAngles.z = 0;
-	
 		this.transform.rotation = Quaternion.Euler(0,0,rotation.eulerAngles.x+90);
 		Debug.Log(this.transform.rotation.eulerAngles);
-
-
-
 	}
 	
 	// Update is called once per frame
