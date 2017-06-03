@@ -25,7 +25,7 @@ GameObject:
   - 60: {fileID: 60000014190813244}
   m_Layer: 0
   m_Name: Tower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,10 +129,11 @@ MonoBehaviour:
   boxCollider: {fileID: 0}
   rb2D: {fileID: 0}
   isMoving: 0
-  step: 0.007
   calmState: {fileID: 21300000, guid: 6a89ffe0d96fba04aa4b1c7c93b638ab, type: 3}
   activatedState: {fileID: 21300000, guid: 7640381237cd1c8439bb91a6533ec354, type: 3}
   deactivatedState: {fileID: 21300000, guid: 9f1f504b555053e4b8359b6b43c7e1bf, type: 3}
+  target: {fileID: 114000010180742052, guid: b4b774adc51c53b4184c9b08a133f7b0, type: 2}
+  towerSpeed: 5
 --- !u!212 &212000010815556760
 SpriteRenderer:
   m_ObjectHideFlags: 1
