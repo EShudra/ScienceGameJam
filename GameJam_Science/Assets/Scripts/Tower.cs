@@ -3,11 +3,19 @@ using System.Collections;
 
 public class Tower : Interactive {
 
+	private enum State {
+		CALM,
+		ACTIVATED,
+		DEACTIVATED
+	}
+
 	public Sprite calmState;
 	public Sprite activatedState;
 	public Sprite deactivatedState;
 
-	private float towerSlime = 10;
+	private State state = State.CALM;
+	private float towerSlime = 0;
+	private const int towerSlimeMaximum = 20;
 
 	// Use this for initialization
 	public override void Start () {
@@ -16,19 +24,42 @@ public class Tower : Interactive {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Alpha1))
-			GetComponent<SpriteRenderer> ().sprite = calmState;
-		else if (Input.GetKeyDown(KeyCode.Alpha2))
-			GetComponent<SpriteRenderer> ().sprite = activatedState;
-		else if (Input.GetKeyDown(KeyCode.Alpha3))
-			GetComponent<SpriteRenderer> ().sprite = deactivatedState;
+		if (Input.GetKeyDown (KeyCode.Alpha1)) {
+			SetCalm ();
+		} else if (Input.GetKeyDown (KeyCode.Alpha2)) {
+			SetActivated ();
+		} else if (Input.GetKeyDown (KeyCode.Alpha3)) {
+			SetDeactivated ();
+		}
+	}
+
+	private void SetCalm() {
+		GetComponent<SpriteRenderer> ().sprite = calmState;
+		state = State.CALM;
+		Debug.Log ("State set to " + state);
+	}
+
+	private void SetActivated() {
+		GetComponent<SpriteRenderer> ().sprite = activatedState;
+		state = State.ACTIVATED;
+		Debug.Log ("State set to " + state);
+	}
+
+	private void SetDeactivated() {
+		GetComponent<SpriteRenderer> ().sprite = deactivatedState;
+		state = State.DEACTIVATED;
+		Debug.Log ("State set to " + state);
 	}
 
 	public override void OnCantMove<T>(T component) {
 		//throw new System.NotImplementedException ();
+
+		if (state == State.ACTIVATED)
+			Debug.Log ("OnCantMove is Tower was activated");
 	}
 
 	public override void OnHit (string tag) {
 		//throw new System.NotImplementedException ();
+
 	}
 }
