@@ -3,15 +3,15 @@ using System.Collections;
 
 public class Heart : Interactive {
 
-	private int slime = 100;
 	public float heartSpeed = 7;
-
-	Vector3 destination;
 	public float shootingResetTime = 0.07f;
 	public float shootingCurrentTime = 0;
 
 	//bullet prefab
 	public GameObject slimeBullet;
+
+	private int slime = 100;
+	private Vector3 destination;
 
 	// Use this for initialization
 	public override void Start () {
