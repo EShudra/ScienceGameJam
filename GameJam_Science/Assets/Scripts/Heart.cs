@@ -4,114 +4,68 @@ using System.Collections;
 public class Heart : Interactive {
 
 	private int slime = 100;
-	const float heartSpeed = 3;
-	float heartSpeedInv = 1/heartSpeed;
-	public float step = 0.5f;
+	public float heartSpeed = 7;
+
 	Vector3 destination;
+	public float shootingResetTime = 0.07f;
+	public float shootingCurrentTime = 0;
+
+	//bullet prefab
+	public GameObject slimeBullet;
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
 		movSpeed = heartSpeed;
+		//GameObject slimeBullet = Resources.Load ("Prefabs/slimeBullet") as GameObject; 
+		//Debug.Log (slimeBullet);
 	}
 	
 	// Update is called once per frame
 	void Update () {										/* Object movement */
-		step = heartSpeed * Time.deltaTime;
-		RaycastHit2D hit;
-		destination = this.transform.position;
+		destination = new Vector3 (0,0,0);
+		float heartStep = step;
 
-
-		if (Input.GetKey (KeyCode.LeftArrow)) {
-			//this.transform.Translate (-step, 0,0);
-			destination = this.transform.position + new Vector3 (-step, 0,0);
+		if((Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.RightArrow)) && (Input.GetKey (KeyCode.UpArrow) || Input.GetKey (KeyCode.DownArrow))){
+			heartStep  /= 1.414214f;
 		}
 
-		if (Input.GetKey (KeyCode.RightArrow)) {
-			//this.transform.Translate (step, 0,0);
-			destination = this.transform.position + new Vector3 (step, 0,0);
+		if (Input.GetKey (KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
+				destination += new Vector3 (-heartStep, 0,0);
 		}
 
-		if (Input.GetKey (KeyCode.DownArrow)) {
-			//this.transform.Translate (0, -step,0);
-			destination = this.transform.position + new Vector3 (0, -step, 0);
+		if (Input.GetKey (KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
+				destination += new Vector3 (heartStep, 0,0);
 		}
 
-		if (Input.GetKey (KeyCode.UpArrow)) {
-			//this.transform.Translate (0, step,0);
-			destination = this.transform.position + new Vector3 (0, step, 0);
+		if (Input.GetKey (KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) {
+				destination += new Vector3 (0, -heartStep, 0);
 		}
 
-		boxCollider.enabled = false;
-		hit = Physics2D.Linecast (this.transform.position, destination);
-		boxCollider.enabled = true;
-
-		if (!hit) {
-			this.transform.position = destination;
+		if (Input.GetKey (KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
+				destination += new Vector3 (0, heartStep, 0);
 		}
 
 
-		/*
-		//RaycastHit2D hit;
-		step = movSpeed*Time.deltaTime;
+		//detect collisions. move if collisions not found
+		RaycastHit2D[] castResult = new RaycastHit2D[4];
+		boxCollider.Cast(destination, castResult, step*2);
+		if ((castResult[0].collider == null)||(castResult[0].collider.tag == "bullet")) {
+			this.transform.Translate (destination);
+		}
 
-		if ((Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) && (Input.GetKey (KeyCode.DownArrow) || Input.GetKey (KeyCode.S))) { 		//Left+Down
-			//Debug.Log ("Diagonal Left+Down pressed.");
+		//shootingCurrentTime
 
-			if (!isMoving)
-				//if (Move (-step, -step, out hit))
-					AttemptMove<Component> (-step, -step);
-			
-		} else if ((Input.GetKey (KeyCode.UpArrow) || Input.GetKey (KeyCode.W)) && (Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D))) { 	//Up+Right
-			//Debug.Log ("Diagonal Up+Right pressed.");
+		if (Input.GetMouseButton(0)) {
 
-			if (!isMoving) 
-				//if (Move (step, step, out hit))
-					AttemptMove<Component> (step, step);
-		
-		} else if ((Input.GetKey (KeyCode.UpArrow) || Input.GetKey (KeyCode.W)) && (Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A))) {	//Up+Left
-			//Debug.Log ("Diagonal Up+Left pressed.");
+			if (Time.time - shootingCurrentTime > shootingResetTime) {
+				shootingCurrentTime = Time.time;
+				Instantiate (Resources.Load ("Prefabs/slimeBullet") as GameObject,this.transform.position,Quaternion.identity,null);
+			}
 
-			if (!isMoving) 
-				//if (Move (-step, step, out hit))
-					AttemptMove<Component> (-step, step);
-			
-		} else if ((Input.GetKey (KeyCode.DownArrow) || Input.GetKey (KeyCode.S)) && (Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D))) {	//Down+Right
-			//Debug.Log ("Diagonal Down+Right pressed.");
 
-			if (!isMoving) 
-				//if (Move (step, -step, out hit))
-					AttemptMove<Component> (step, -step);
-			
-		} else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) {																		//Left
-			//Debug.Log ("Left key was pressed.");
+		} 
 
-			if (!isMoving) 
-				//if (Move (-step, 0, out hit))
-					AttemptMove<Component> (-step, 0);
-			
-		} else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) {																		//Right
-			//Debug.Log ("Right key was pressed.");
-
-			if (!isMoving) 
-				//if (Move (step, 0, out hit))
-					AttemptMove<Component> (step, 0);
-			
-		} else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey (KeyCode.W)) {																			//Up
-			//Debug.Log ("Up key was pressed.");		
-
-			if (!isMoving) 
-				//if (Move (0, step, out hit))
-					AttemptMove<Component> (0, step);
-			
-		} else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey (KeyCode.S)) {																		//Down
-			//Debug.Log ("Down key was pressed.");
-
-			if (!isMoving) 
-				//if (Move (0, -step, out hit))
-					AttemptMove<Component> (0, -step);
-
-		}*/
 	}
 
 	public override void OnCantMove<T> (T component){}
