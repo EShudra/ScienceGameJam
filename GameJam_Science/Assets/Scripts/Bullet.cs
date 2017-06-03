@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Bullet : Interactive {
 	public Vector3 target;
-	public float damage;
+	public int damage = 1;
 	public float bulletSpeed;
 	public Camera cam;
 	private bool deadBullet = false;
@@ -21,8 +21,7 @@ public class Bullet : Interactive {
 			rotation = Quaternion.Euler (Mathf.Abs (rotation.eulerAngles.y - 270), 0, rotation.eulerAngles.x + 90);
 		}
 		this.transform.rotation = rotation;
-		Debug.Log(this.transform.rotation.eulerAngles);
-
+		//Debug.Log(this.transform.rotation.eulerAngles);
 		boxCollider.enabled = false;
 	}
 	
@@ -48,7 +47,7 @@ public class Bullet : Interactive {
 				deadBullet = true;
 				Enemy attackedEnemy = hit.transform.GetComponent<Enemy>() as Enemy;
 				//this.enabled = false;
-				attackedEnemy.OnHit (this.tag);
+				attackedEnemy.OnHit (this.gameObject);
 			}
 
 		} else {
@@ -68,7 +67,7 @@ public class Bullet : Interactive {
 		//throw new System.NotImplementedException ();
 	}
 
-	public override void OnHit (string tag)
+	public override void OnHit (GameObject collideObject)
 	{
 		//throw new System.NotImplementedException ();
 	}

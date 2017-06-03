@@ -7,7 +7,7 @@ public abstract class Interactive : MonoBehaviour {
 	public Collider2D boxCollider;
 	public Rigidbody2D rb2D;
 	public bool isMoving = false; //true if object is moving
-	public float step = 0.007f;
+	protected float step = 0.007f;
 
 	public virtual void Start(){
 		boxCollider = GetComponent <Collider2D> ();
@@ -75,6 +75,6 @@ public abstract class Interactive : MonoBehaviour {
 		/*Interactive hitObj = component as Interactive; //interpretate component which hits as interactive and call OnHit() method of obj
 		hitObj.OnHit (this.tag);*/
 
-	public abstract void OnHit (string tag);
+	public abstract void OnHit (GameObject collideObject);
 
 }
