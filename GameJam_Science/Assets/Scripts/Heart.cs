@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Heart : Interactive {
 
+
 	private int slime = 100;
 
 	Vector3 destination;
@@ -11,6 +12,9 @@ public class Heart : Interactive {
 
 	//bullet prefab
 	public GameObject slimeBullet;
+
+	private int slime = 100;
+	private Vector3 destination;
 
 	// Use this for initialization
 	public override void Start () {
