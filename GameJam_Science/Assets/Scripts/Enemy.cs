@@ -15,7 +15,7 @@ public class Enemy : Interactive {
 	// Update is called once per frame
 	void Update () {
 		if (!isMoving) {
-			Vector3 end = Vector3.MoveTowards (this.transform.position, target.transform.position, movSpeed * Time.deltaTime);
+			Vector3 end = Vector3.MoveTowards (this.transform.position, target.transform.position, step);
 			//Vector2 pos = (end - this.transform.position).x, 
 			AttemptMove <Component> ((end - this.transform.position).x, (end - this.transform.position).y);
 		}
