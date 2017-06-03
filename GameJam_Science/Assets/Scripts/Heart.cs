@@ -3,10 +3,6 @@ using System.Collections;
 
 public class Heart : Interactive {
 
-
-	private int slime = 100;
-
-	Vector3 destination;
 	public float shootingResetTime = 0.07f;
 	public float shootingCurrentTime = 0;
 
