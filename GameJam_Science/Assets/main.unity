@@ -383,7 +383,7 @@ Prefab:
     - target: {fileID: 114000010180742052, guid: b4b774adc51c53b4184c9b08a133f7b0,
         type: 2}
       propertyPath: shootingResetTime
-      value: 0.05
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 114000010180742052, guid: b4b774adc51c53b4184c9b08a133f7b0,
         type: 2}
@@ -391,6 +391,21 @@ Prefab:
       value: 
       objectReference: {fileID: 1000010308469922, guid: 1bc6fc750ec5f194588335e86968e364,
         type: 2}
+    - target: {fileID: 50000010695551422, guid: b4b774adc51c53b4184c9b08a133f7b0,
+        type: 2}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50000010695551422, guid: b4b774adc51c53b4184c9b08a133f7b0,
+        type: 2}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50000010695551422, guid: b4b774adc51c53b4184c9b08a133f7b0,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4b774adc51c53b4184c9b08a133f7b0, type: 2}
   m_IsPrefabParent: 0
