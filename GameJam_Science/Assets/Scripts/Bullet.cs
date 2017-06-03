@@ -13,7 +13,6 @@ public class Bullet : Interactive {
 		cam = GameObject.FindObjectOfType<Camera> ();
 		target = cam.ScreenToWorldPoint (Input.mousePosition);
 		target.z = 0;
-
 		Quaternion rotation = Quaternion.LookRotation ((target - this.transform.position));
 
 		if (this.transform.position.x < target.x) {
@@ -25,8 +24,6 @@ public class Bullet : Interactive {
 		Debug.Log(this.transform.rotation.eulerAngles);
 
 		boxCollider.enabled = false;
-
-
 	}
 	
 	// Update is called once per frame
