@@ -7,6 +7,8 @@ public class Tower : Interactive {
 	public Sprite activatedState;
 	public Sprite deactivatedState;
 
+	private float towerSlime = 10;
+
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
