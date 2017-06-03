@@ -10,11 +10,11 @@ public class CameraBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GetComponent <Heart> ();
-		offset = this.transform.position - player.transform.position;
+		offset = transform.position - player.transform.position;
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
-		this.transform.position = player.transform.position + offset;
+		transform.position = player.transform.position + offset;
 	}
 }
