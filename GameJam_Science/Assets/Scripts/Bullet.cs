@@ -6,7 +6,7 @@ public class Bullet : Interactive {
 	public float damage;
 	public float bulletSpeed;
 	public Camera cam;
-
+	private bool deadBullet = false;
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
@@ -14,8 +14,16 @@ public class Bullet : Interactive {
 		target = cam.ScreenToWorldPoint (Input.mousePosition);
 		target.z = 0;
 		Quaternion rotation = Quaternion.LookRotation ((target - this.transform.position));
-		this.transform.rotation = Quaternion.Euler(0,0,rotation.eulerAngles.x+90);
+
+		if (this.transform.position.x < target.x) {
+			rotation = Quaternion.Euler (Mathf.Abs (rotation.eulerAngles.y - 270), 0, rotation.eulerAngles.x + 270);
+		} else {
+			rotation = Quaternion.Euler (Mathf.Abs (rotation.eulerAngles.y - 270), 0, rotation.eulerAngles.x + 90);
+		}
+		this.transform.rotation = rotation;
 		Debug.Log(this.transform.rotation.eulerAngles);
+
+		boxCollider.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -25,9 +33,9 @@ public class Bullet : Interactive {
 			Vector3 end = Vector3.MoveTowards (this.transform.position, target, bulletSpeed * Time.deltaTime);
 			Vector3 endLinecast = Vector3.MoveTowards (this.transform.position, target, bulletSpeed * Time.deltaTime * 2);
 
-			boxCollider.enabled = false;
+			//boxCollider.enabled = false;
 			hit = Physics2D.Linecast (this.transform.position, endLinecast);
-			boxCollider.enabled = true;
+			//boxCollider.enabled = true;
 
 			if ((!hit) || (hit.collider.tag == "Heart") || (hit.collider.tag == "bullet")) {
 				//this.transform.Translate (end - this.transform.position);
@@ -36,6 +44,12 @@ public class Bullet : Interactive {
 				BulletDie ();
 			}
 
+			if  ((hit)&&(hit.collider.tag == "enemy")&&(!deadBullet)) {
+				deadBullet = true;
+				Enemy attackedEnemy = hit.transform.GetComponent<Enemy>() as Enemy;
+				//this.enabled = false;
+				attackedEnemy.OnHit (this.tag);
+			}
 
 		} else {
 			BulletDie ();
@@ -43,8 +57,10 @@ public class Bullet : Interactive {
 	}
 
 	void BulletDie(){
-		this.GetComponent<Animator> ().SetTrigger ("die");
-		Destroy (this.gameObject, 0.25f);	
+
+
+			this.GetComponent<Animator> ().SetTrigger ("die");
+			Destroy (this.gameObject, 0.25f);
 	}
 
 	public override void OnCantMove<T> (T component)

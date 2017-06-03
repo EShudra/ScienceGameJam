@@ -104,8 +104,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movSpeed: 5
+  boxCollider: {fileID: 0}
+  rb2D: {fileID: 0}
   isMoving: 0
+  step: 0.007
   target: {fileID: 0}
+  enemyHP: 10
 --- !u!212 &212000013485489934
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -135,7 +139,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5ccfc8972ed6a7b4481e4f2ff02178d4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33a3cb86cf75df341ba269c463a90dea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
