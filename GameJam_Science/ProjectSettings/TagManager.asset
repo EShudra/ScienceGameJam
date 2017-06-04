@@ -10,6 +10,8 @@ TagManager:
   - Tower
   - towerBullet
   - exit
+  - ground
+  - creepBullet
   layers:
   - Default
   - TransparentFX
