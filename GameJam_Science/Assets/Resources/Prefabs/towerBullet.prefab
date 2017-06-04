@@ -106,12 +106,12 @@ MonoBehaviour:
   movSpeed: 5
   boxCollider: {fileID: 0}
   rb2D: {fileID: 0}
-  isMoving: 0
+  isMoving: 1
   target: {x: 0, y: 0, z: 0}
-  damage: 3
+  damage: 5
   bulletSpeed: 18
   cam: {fileID: 0}
-  towerTarget: {x: 0, y: 0, z: 0}
+  player: {fileID: 0}
 --- !u!212 &212000012090066338
 SpriteRenderer:
   m_ObjectHideFlags: 1
