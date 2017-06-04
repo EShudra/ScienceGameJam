@@ -1,0 +1,1 @@
+Files from "update1" should be copied in "1" with replacement, then copy files from "update2" should be copied in "1" with replacement as well.
