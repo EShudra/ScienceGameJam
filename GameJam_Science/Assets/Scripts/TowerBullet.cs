@@ -58,18 +58,18 @@ public class TowerBullet : Bullet {
 				//this.transform.Translate (end - this.transform.position);
 				rb2D.position = end;
 			} else {
-				BulletDie ();
+//				BulletDie ();
 			}
 
-			if  ((hit)&&(hit.collider.tag == "enemy")&&(!deadBullet)) {
+			/*if  ((hit)&&(hit.collider.tag == "enemy")&&(!deadBullet)) {
 				deadBullet = true;
 				Enemy attackedEnemy = hit.transform.GetComponent<Enemy>() as Enemy;
 				//this.enabled = false;
 				attackedEnemy.OnHit (this.gameObject);
-			}
+			}*/
 
 		} else {
-			BulletDie ();
+			//BulletDie ();
 		}
 	}
 }
