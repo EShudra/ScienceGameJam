@@ -52,6 +52,7 @@ public class TowerBullet : Bullet {
 			|| (hit.collider.tag == "bullet")
 			|| (hit.collider.tag == "exit")
 			|| (hit.collider.tag == "Tower")
+			|| (hit.collider.tag == "ground")
 			|| (hit.collider.tag == "towerBullet")) {
 			rb2D.position = end;
 		} else {

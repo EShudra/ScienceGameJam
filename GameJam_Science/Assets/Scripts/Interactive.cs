@@ -18,30 +18,17 @@ public abstract class Interactive : MonoBehaviour {
 		Vector2 start = transform.position; 
 		Vector2 end = start + new Vector2(deltaX,deltaY); //calculating new position
 
-		/*boxCollider.enabled = false;
-		hit = Physics2D.Linecast (start, end);
-		boxCollider.enabled = true; //checking collisions*/
+
 
 		RaycastHit2D[] castResult;// = new RaycastHit2D[0];
-		//boxCollider.Cast(end-start, castResult, step*2);
-		//boxCollider.Cast(
+
 
 		Vector3 bsize = boxCollider.bounds.size;
-		boxCollider.enabled = false;
-		//castResult = Physics2D.BoxCastAll (end-start, bsize, 0, Vector3.zero);
-		//castResult = Physics2D.BoxCastAll (end+new Vector2(deltaX,deltaY),bsize,0,Vector3.zero);
+
+
 		castResult = Physics2D.BoxCastAll (start, bsize, 0, new Vector2 (deltaX, deltaY), step * 2);
-		//castResult = Physics2D.BoxCastAll (this.transform.position, bsize, 0, end - start, step * 2);
-		boxCollider.enabled = true;
-		/*if (hit.transform == null) {//if hits nothing then move
-			StartCoroutine(SmoothMovement(end));
-			return true;
-		}*/
-		/*if (castResult.Length != 0) {
-			hit = castResult [0];	
-		} else {
-			hit = null;
-		}*/
+
+
 		hit = castResult;
 
 
@@ -57,7 +44,11 @@ public abstract class Interactive : MonoBehaviour {
 				return true;
 			}
 
-			if (item.collider.tag == "heart"){
+			if ((item.collider.tag == "heart") && (this.tag != "heart") && (this.tag != "Tower")){
+				return true;
+			}
+
+			if ((item.collider.tag == "Tower") && (this.tag != "heart") && (this.tag != "Tower")){
 				return true;
 			}
 		}
@@ -80,9 +71,18 @@ public abstract class Interactive : MonoBehaviour {
 		return false;*/
 	}
 
-	bool isWallInHits(RaycastHit2D[] castResult){
+	public bool isWallInHits(RaycastHit2D[] castResult){
 		foreach (var item in castResult) {
 			if (item.transform.tag == "wall") {
+				return true;
+			};
+		}
+		return false;
+	}
+
+	public bool hitsHave(string tag, RaycastHit2D[] castResult){
+		foreach (var item in castResult) {
+			if (item.transform.tag == tag) {
 				return true;
 			};
 		}

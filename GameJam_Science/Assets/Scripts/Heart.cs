@@ -53,13 +53,22 @@ public class Heart : Interactive {
 
 
 		//detect collisions. move if collisions not found
-		RaycastHit2D[] castResult = new RaycastHit2D[4];
-		boxCollider.Cast(destination, castResult, step*3);
-		if ((castResult[0].collider == null)||(castResult[0].collider.tag == "bullet")||(castResult[0].collider.tag == "ground")) {
+		//RaycastHit2D[] castResult = new RaycastHit2D[4];
+		//boxCollider.Cast(destination, castResult, step*3);
+		Vector3 bsize = this.boxCollider.bounds.size;
+		boxCollider.enabled = false;
+		RaycastHit2D[] castResult =  Physics2D.BoxCastAll (this.transform.position, bsize, 0, destination,step*3);
+		boxCollider.enabled = true;
+		if (((castResult.Length == 0)||
+			(castResult[0].collider.tag == "bullet")||
+			(castResult[0].collider.tag == "Tower")||
+			(castResult[0].collider.tag == "enemy")||
+			(castResult[0].collider.tag == "ground")) &&
+			(!isWallInHits(castResult))) {
 			this.transform.Translate (destination);
 		}
 
-		if  ((castResult[0].collider != null)&&(castResult[0].collider.tag == "exit")){
+		if  ((castResult.Length != 0)&&hitsHave("exit",castResult)){
 			this.transform.Translate (destination);
 			FindObjectOfType<Exit> ().OnHit (this.gameObject);
 		}
