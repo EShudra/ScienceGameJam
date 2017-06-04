@@ -7,8 +7,8 @@ public class Bullet : Interactive {
 	public float bulletSpeed;
 	public Camera cam;
 
-	private bool deadBullet = false;
-	Vector3 end;//end of step movement
+	protected bool deadBullet = false;
+	protected Vector3 end;//end of step movement
 
 	// Use this for initialization
 	public override void Start () {
@@ -81,7 +81,7 @@ public class Bullet : Interactive {
 
 
 
-	void BulletDie(){
+	protected void BulletDie(){
 			this.GetComponent<Animator> ().SetTrigger ("die");
 			Destroy (this.gameObject, 0.25f);
 	}
