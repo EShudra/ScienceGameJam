@@ -10,7 +10,7 @@ public class TowerHealthBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		tower = FindObjectOfType<Tower>();
+		tower = this.transform.parent.transform.parent.GetComponent<Tower> ();
 	}
 	
 	// Update is called once per frame
