@@ -90,10 +90,6 @@ public class Bullet : Interactive {
 	}
 
 
-
-
-
-
 	public virtual void BulletDie(){
 
 			this.GetComponent<Animator> ().SetTrigger ("die");
