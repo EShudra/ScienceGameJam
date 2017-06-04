@@ -12,7 +12,7 @@ public class Enemy : Interactive {
 	public int enemyHP = 100;
 	public int enemyDamage = 1;
 	bool isCollide = false;
-	public int collideMemoryLength;//how much last collisions result is remembered
+	public int collideMemoryLength = 5;//how much last collisions result is remembered
 	Queue<bool> collideStates = new Queue<bool>();
 	//bool[] collideStates = new bool[collideMemoryLength];
 
@@ -102,6 +102,11 @@ public class Enemy : Interactive {
 		if (collideObject.tag == "bullet"){
 			//Bullet bulletObj = collideObject as Bullet;
 			Bullet bulletObj = collideObject.GetComponent<Bullet>();
+			enemyHP -= bulletObj.damage;
+		}
+
+		if (collideObject.tag == "towerBullet") {
+			TowerBullet bulletObj = collideObject.GetComponent<TowerBullet>();
 			enemyHP -= bulletObj.damage;
 		}
 	}

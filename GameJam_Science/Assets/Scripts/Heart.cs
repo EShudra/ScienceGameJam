@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Heart : Interactive {
 
-
 	public float shootingResetTime = 0.07f;
 	public float shootingCurrentTime = 0;
 
