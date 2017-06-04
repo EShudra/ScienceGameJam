@@ -6,8 +6,10 @@ public class Bullet : Interactive {
 	public int damage = 1;
 	public float bulletSpeed;
 	public Camera cam;
+
 	private bool deadBullet = false;
 	Vector3 end;//end of step movement
+
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
@@ -54,6 +56,7 @@ public class Bullet : Interactive {
 	}
 
 
+
 	// Update is called once per frame
 	void Update () {
 		updateTarget ();
@@ -62,10 +65,13 @@ public class Bullet : Interactive {
 			end = Vector3.MoveTowards (this.transform.position, target, bulletSpeed * Time.deltaTime);
 
 			executeBulletCollisions ();
+
 		} else {
 			BulletDie ();
 		}
 	}
+
+
 
 
 
