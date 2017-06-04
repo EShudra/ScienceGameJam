@@ -16,6 +16,7 @@ public class Heart : Interactive {
 	public float slime = 1000;
 	public int slimeMaximum = 1000;
 	private Vector3 destination;
+	private bool dead;
 
 	public float bulletCost = 2;
 	public float splashCost = 25;
@@ -151,8 +152,15 @@ public class Heart : Interactive {
 	public override void OnHit (GameObject collideObject){
 
 
-		if (slime > 0) slime--;
+		if (slime > 0)
+			slime--;
+		else
+			dead = true;
 		Debug.Log (string.Format("heart slime: {0}",slime));
+
+	}
+
+	void Death() {
 
 	}
 }

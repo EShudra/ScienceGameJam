@@ -56,10 +56,10 @@ public class Tower : Interactive {
 		}
 
 		if (state == State.ACTIVATED) {
-			if (Time.time - shootingCurrentTime > shootingSpeed && currentTowerSlime > 0 && shooting) {
+			if (Time.time - shootingCurrentTime > shootingSpeed && this.currentTowerSlime > 0 && shooting) {
 				shootingCurrentTime = Time.time;
 				Instantiate (Resources.Load ("Prefabs/towerBullet") as GameObject,this.transform.position,Quaternion.identity,null);
-				currentTowerSlime -= shotCost;
+				this.currentTowerSlime -= shotCost;
 				//Debug.Log ("currentTowerSlime: "+currentTowerSlime);
 			}
 		}
@@ -94,31 +94,31 @@ public class Tower : Interactive {
 		if (collideObject.tag == "bullet") {
 			 Bullet bullet = collideObject.GetComponent <Bullet>();
 
-			if (currentTowerSlime == 0 && state == State.CALM) //If the state was CALM and the tower had zero slime, we add half of the maximum amount of slime.
-				currentTowerSlime += towerSlimeMaximum / 2;
+			if (this.currentTowerSlime == 0 && state == State.CALM) //If the state was CALM and the tower had zero slime, we add half of the maximum amount of slime.
+				this.currentTowerSlime += towerSlimeMaximum / 2;
 			
-			if (currentTowerSlime != towerSlimeMaximum)
-				currentTowerSlime += bullet.damage;
+			if (this.currentTowerSlime != towerSlimeMaximum)
+				this.currentTowerSlime += bullet.damage;
 
-			if (currentTowerSlime > 0)
+			if (this.currentTowerSlime > 0)
 				SetActivated ();
 
 			//Debug.Log ("currentTowerSlime: "+currentTowerSlime);
 		}
 
 		if (collideObject.tag == "creepBullet") {
-			if (currentTowerSlime == 0 && state == State.CALM) {
-				currentTowerSlime += towerSlimeMaximum / 2;
+			if (this.currentTowerSlime == 0 && state == State.CALM) {
+				this.currentTowerSlime += towerSlimeMaximum / 2;
 				SetActivated ();
 			}
 		}
 	}
-		
+
 	private void SetCalm() {
 		//boxCollider.enabled = true;
 		GetComponent<SpriteRenderer> ().sprite = calmState;
 		state = State.CALM;
-		currentTowerSlime = 0;
+		this.currentTowerSlime = 0;
 		//Debug.Log ("State set to " + state);
 	}
 
@@ -132,7 +132,7 @@ public class Tower : Interactive {
 	private void SetDeactivated() {
 		//DieUnderTheTower ();
 		state = State.DEACTIVATED;
-		currentTowerSlime = 0;
+		this.currentTowerSlime = 0;
 		GetComponent<SpriteRenderer> ().sprite = deactivatedState;
 		//Debug.Log ("State set to " + state);
 	}
