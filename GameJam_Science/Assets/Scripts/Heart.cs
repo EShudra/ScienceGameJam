@@ -17,9 +17,13 @@ public class Heart : Interactive {
 	public int slimeMaximum = 1000;
 	private Vector3 destination;
 
+	public float bulletCost = 2;
+	public float splashCost = 25;
+	public float stepCost = 1;
+
 	SpriteRenderer rend;
 	public Sprite heartIdle;
-	public Sprite heartFire;
+	public Sprite[] heartFire;
 
 	// Use this for initialization
 	public override void Start () {
@@ -57,9 +61,6 @@ public class Heart : Interactive {
 		}
 
 
-		//detect collisions. move if collisions not found
-		//RaycastHit2D[] castResult = new RaycastHit2D[4];
-		//boxCollider.Cast(destination, castResult, step*3);
 		Vector3 bsize = this.boxCollider.bounds.size;
 		boxCollider.enabled = false;
 		RaycastHit2D[] castResult =  Physics2D.BoxCastAll (this.transform.position, bsize, 0, destination,step*3);
@@ -70,7 +71,21 @@ public class Heart : Interactive {
 			(castResult[0].collider.tag == "enemy")||
 			(castResult[0].collider.tag == "ground")) &&
 			(!isWallInHits(castResult))) {
-			this.transform.Translate (destination);
+
+
+			RaycastHit2D[] hitArr = new RaycastHit2D [7];
+			hitArr = Physics2D.CircleCastAll (this.transform.position, 0.16f, Vector3.zero);
+			bool ableToInst = true;
+
+			foreach (var item in hitArr) {
+				ableToInst &= item.collider.tag != "ground";
+			}
+			if (ableToInst) {
+				Instantiate (Resources.Load ("Prefabs/GroundSlime") as GameObject, this.transform.position, Quaternion.identity, null);
+				slime -= stepCost;
+			}
+				
+			this.transform.Translate (destination); ///mooving HERE
 		}
 
 		if  ((castResult.Length != 0)&&hitsHave("exit",castResult)){
@@ -81,7 +96,7 @@ public class Heart : Interactive {
 		//shootingCurrentTime
 
 		if (Input.GetMouseButtonDown(0)) {
-			rend.sprite = heartFire;
+			rend.sprite =  heartFire[ Mathf.FloorToInt(Random.Range(0,heartFire.Length))];
 		}
 
 		if (Input.GetMouseButtonUp(0)) {
@@ -93,6 +108,7 @@ public class Heart : Interactive {
 
 			if (Time.time - shootingCurrentTime > shootingResetTime) {
 				shootingCurrentTime = Time.time;
+				slime -= bulletCost;
 				Instantiate (Resources.Load ("Prefabs/slimeBullet") as GameObject,this.transform.position,Quaternion.identity,null);
 			}
 
@@ -100,6 +116,7 @@ public class Heart : Interactive {
 		} 
 
 		if (Input.GetKeyDown (KeyCode.Space)) {
+			slime -= splashCost;
 			instCreepByRadius (creepRadius, creepLineCount);
 		}
 
