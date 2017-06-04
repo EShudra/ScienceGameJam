@@ -103,9 +103,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15533207e295b34e86c8b1522050dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movSpeed: 5
+  movSpeed: 15
+  boxCollider: {fileID: 0}
+  rb2D: {fileID: 0}
   isMoving: 0
   target: {fileID: 0}
+  ghostTargetStep: 0.05
+  ghostTargetDispersion: 15
+  slowStep: 0.01
+  enemyHP: 10
+  enemyDamage: 1
+  collideMemoryLength: 5
 --- !u!212 &212000013485489934
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -134,8 +142,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5ccfc8972ed6a7b4481e4f2ff02178d4, type: 3}
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: 33a3cb86cf75df341ba269c463a90dea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

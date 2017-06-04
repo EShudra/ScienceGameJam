@@ -26,7 +26,7 @@ GameObject:
   - 61: {fileID: 61000010278019376}
   m_Layer: 0
   m_Name: slimeBullet
-  m_TagString: Untagged
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010308469922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9939706, y: 3.436941, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -55,7 +55,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -84,7 +84,7 @@ Animator:
   m_GameObject: {fileID: 1000010308469922}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: da92e4f96292b784893d2eda0ca6ec0a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 818773b7cb2c65542a1c2fad57eda33c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -107,9 +107,8 @@ MonoBehaviour:
   boxCollider: {fileID: 0}
   rb2D: {fileID: 0}
   isMoving: 0
-  step: 0.007
   target: {x: 0, y: 0, z: 0}
-  damage: 0
+  damage: 1
   bulletSpeed: 18
   cam: {fileID: 0}
 --- !u!212 &212000013738517078
@@ -141,7 +140,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 84a48ee5a32acbd4487fa838d0c56bda, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fbeeb46302ee9b942a1025806079edff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
