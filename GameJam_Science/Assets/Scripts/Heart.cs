@@ -9,6 +9,9 @@ public class Heart : Interactive {
 	//bullet prefab
 	public GameObject slimeBullet;
 
+	public int creepLineCount = 30;
+	public float creepRadius = 2;
+
 	private int slime = 100;
 	private Vector3 destination;
 
@@ -49,7 +52,7 @@ public class Heart : Interactive {
 
 		//detect collisions. move if collisions not found
 		RaycastHit2D[] castResult = new RaycastHit2D[4];
-		boxCollider.Cast(destination, castResult, step*2);
+		boxCollider.Cast(destination, castResult, step*3);
 		if ((castResult[0].collider == null)||(castResult[0].collider.tag == "bullet")||(castResult[0].collider.tag == "ground")) {
 			this.transform.Translate (destination);
 		}
@@ -71,6 +74,34 @@ public class Heart : Interactive {
 
 		} 
 
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			instCreepByRadius (creepRadius, creepLineCount);
+		}
+
+	}
+
+	void instCreepByRadius(float radius, int count){
+		Vector3 startVec = Vector3.up*radius;
+		for (int i = 0; i < count+2; i++) {
+			Vector3 vec =  Quaternion.AngleAxis (360/count*i+0.01f,Vector3.forward)*startVec;
+			vec += transform.position;
+			GameObject obj = Instantiate (Resources.Load ("Prefabs/creepBullet") as GameObject, this.transform.position, Quaternion.identity, null) as GameObject;
+			obj.GetComponent<creepBullet> ().target = vec;
+		}
+
+	}
+
+	void creepRadiusCast(float r, float dispersion, int iter){
+		for (int i = 0; i <= iter; i++) {
+			GameObject obj = Instantiate (Resources.Load ("Prefabs/creepBullet") as GameObject, this.transform.position, Quaternion.identity, null) as GameObject;
+			obj.GetComponent<creepBullet> ().creepRadius = r;
+			obj.GetComponent<creepBullet> ().creepRadiusDispersion = dispersion;
+		}
+	}
+
+	IEnumerator waitBeforeRadiusCast(float delay, float r, float dispersion, int iter){
+		yield return new WaitForSeconds(delay);
+		creepRadiusCast (r, dispersion, iter);
 	}
 
 	public override void OnCantMove<T> (T component){}
@@ -78,6 +109,6 @@ public class Heart : Interactive {
 	public override void OnHit (GameObject collideObject){
 
 		slime--;
-		Debug.Log (string.Format("heart slime: {0}",slime));
+		//Debug.Log (string.Format("heart slime: {0}",slime));
 	}
 }

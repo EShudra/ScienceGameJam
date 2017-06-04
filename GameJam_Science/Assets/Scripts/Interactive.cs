@@ -14,7 +14,7 @@ public abstract class Interactive : MonoBehaviour {
 		rb2D = GetComponent <Rigidbody2D> ();
 	}
 
-	public bool Move(float deltaX, float deltaY, out RaycastHit2D hit){
+	public bool Move(float deltaX, float deltaY, out RaycastHit2D[] hit){
 		Vector2 start = transform.position; 
 		Vector2 end = start + new Vector2(deltaX,deltaY); //calculating new position
 
@@ -22,18 +22,69 @@ public abstract class Interactive : MonoBehaviour {
 		hit = Physics2D.Linecast (start, end);
 		boxCollider.enabled = true; //checking collisions*/
 
-		RaycastHit2D[] castResult = new RaycastHit2D[4];
-		boxCollider.Cast(end-start, castResult, step*2);
+		RaycastHit2D[] castResult;// = new RaycastHit2D[0];
+		//boxCollider.Cast(end-start, castResult, step*2);
+		//boxCollider.Cast(
 
+		Vector3 bsize = boxCollider.bounds.size;
+		boxCollider.enabled = false;
+		//castResult = Physics2D.BoxCastAll (end-start, bsize, 0, Vector3.zero);
+		//castResult = Physics2D.BoxCastAll (end+new Vector2(deltaX,deltaY),bsize,0,Vector3.zero);
+		castResult = Physics2D.BoxCastAll (start, bsize, 0, new Vector2 (deltaX, deltaY), step * 2);
+		//castResult = Physics2D.BoxCastAll (this.transform.position, bsize, 0, end - start, step * 2);
+		boxCollider.enabled = true;
 		/*if (hit.transform == null) {//if hits nothing then move
 			StartCoroutine(SmoothMovement(end));
 			return true;
 		}*/
-		hit = castResult [0];
+		/*if (castResult.Length != 0) {
+			hit = castResult [0];	
+		} else {
+			hit = null;
+		}*/
+		hit = castResult;
 
-		if (castResult[0].collider == null) {
-			StartCoroutine(SmoothMovement(end));
+
+		//bool collides = false;
+
+		foreach (var item in castResult) {
+			//Debug.Log (item.collider.tag);
+			if (item.collider.tag == "wall"){
+				return true;
+			}
+
+			if ((item.collider.tag == "enemy") && (this.tag != "enemy")) {
+				return true;
+			}
+
+			if (item.collider.tag == "heart"){
+				return true;
+			}
+		}
+
+
+		StartCoroutine (SmoothMovement (end));
+		return false;	
+
+		
+
+		/*Debug.Log (castResult[0].collider.tag);
+
+		if ((castResult[0].collider == null) || (castResult[0].collider.tag == "ground")){
+
+			if (!isWallInHits(castResult)) { 
+				StartCoroutine (SmoothMovement (end));
+			}
 			return true;
+		}
+		return false;*/
+	}
+
+	bool isWallInHits(RaycastHit2D[] castResult){
+		foreach (var item in castResult) {
+			if (item.transform.tag == "wall") {
+				return true;
+			};
 		}
 		return false;
 	}
@@ -54,14 +105,18 @@ public abstract class Interactive : MonoBehaviour {
 	public bool AttemptMove<T>(float deltaX, float deltaY)
 		where T: Component
 	{
-		RaycastHit2D hit;
+		RaycastHit2D[] hit;
 		bool canMove = Move (deltaX, deltaY, out hit);
 
-		if (hit.transform == null) { //do nothing if collide nothing
+		/*if (hit.Length == 0) { //do nothing if collide nothing
 			return canMove;	
+		}*/
+		//Debug.Log (canMove);
+		if (!canMove){
+			return canMove;
 		}
 
-		T hitComponent = hit.transform.GetComponent<T> ();
+		T hitComponent = hit[0].transform.GetComponent<T> ();
 
 		if (!canMove && hitComponent != null) { 
 			OnCantMove(hitComponent);

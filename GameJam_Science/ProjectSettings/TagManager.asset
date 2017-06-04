@@ -12,6 +12,7 @@ TagManager:
   - exit
   - ground
   - creepBullet
+  - wall
   layers:
   - Default
   - TransparentFX
@@ -46,6 +47,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: bg
+    uniqueID: 3922532229
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
