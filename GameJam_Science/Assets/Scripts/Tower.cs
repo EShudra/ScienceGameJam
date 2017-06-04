@@ -16,8 +16,8 @@ public class Tower : Interactive {
 	public Heart target;
 	public Transform shootingTarget;
 	public float towerSpeed = 1;
-	public float shotCost = 2;
-	public float shootingSpeed = 0.007f;
+	public float shotCost = 0.01f;
+	public float shootingSpeed = 0.7f;
 	public float shootingCurrentTime = 0;
 
 	private State state = State.CALM;
@@ -48,43 +48,36 @@ public class Tower : Interactive {
 		}
 
 		if (state == State.ACTIVATED) {
-			if (Time.time - shootingCurrentTime > shootingSpeed) {
+			if (Time.time - shootingCurrentTime > shootingSpeed && currentTowerSlime > 0) {
 				shootingCurrentTime = Time.time;
 				Instantiate (Resources.Load ("Prefabs/towerBullet") as GameObject,this.transform.position,Quaternion.identity,null);
 				currentTowerSlime -= shotCost;
 			}
 		}
+
+		if (state == State.ACTIVATED && currentTowerSlime <= 0)
+			SetDeactivated ();
 	}
 
 	public override void OnCantMove<T>(T component) {
 		//throw new System.NotImplementedException ();
-
-		if (state == State.ACTIVATED) {
-			currentTowerSlime--;
-			Debug.Log ("current tower slime: "+currentTowerSlime);
-		}
-
-		//if (currentTowerSlime == 0)
-		//	SetDeactivated ();
+		Debug.Log("OnCantMove activated");
 	}
 
 	public override void OnHit (GameObject collideObject) {
 		//throw new System.NotImplementedException ();
+		Debug.Log("OnHit activated");
 
 		if (collideObject.tag == "bullet") {
-			Bullet bullet = collideObject.GetComponent <Bullet>();
+			 Bullet bullet = collideObject.GetComponent <Bullet>();
+
 			if (currentTowerSlime == 0 && state == State.CALM) //If the state was CALM and the tower had zero slime, we add half of the maximum amount of slime.
-				currentTowerSlime = towerSlimeMaximum / 2;
+				currentTowerSlime += towerSlimeMaximum / 2;
 			
 			if (currentTowerSlime != towerSlimeMaximum)
 				currentTowerSlime += bullet.damage;
 
-			if (currentTowerSlime == 0)
-				SetDeactivated ();
-			
-			Debug.Log ("current tower slime: "+currentTowerSlime);
-
-			if (currentTowerSlime == towerSlimeMaximum)
+			if (currentTowerSlime > 0)
 				SetActivated ();
 		}
 	}

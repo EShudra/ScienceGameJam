@@ -133,7 +133,11 @@ MonoBehaviour:
   activatedState: {fileID: 21300000, guid: da98809dfc1620b409018706baa981c1, type: 3}
   deactivatedState: {fileID: 21300000, guid: 9f1f504b555053e4b8359b6b43c7e1bf, type: 3}
   target: {fileID: 114000010180742052, guid: b4b774adc51c53b4184c9b08a133f7b0, type: 2}
+  shootingTarget: {fileID: 0}
   towerSpeed: 5
+  shotCost: 1
+  shootingSpeed: 0.5
+  shootingCurrentTime: 0
 --- !u!212 &212000010815556760
 SpriteRenderer:
   m_ObjectHideFlags: 1
