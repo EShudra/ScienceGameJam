@@ -64,6 +64,20 @@ public class Tower : Interactive {
 		Debug.Log("OnCantMove activated");
 	}
 
+	private void DieUnderTheTower(){
+		boxCollider.enabled = true;
+		RaycastHit2D[] hits = new RaycastHit2D[8];
+		boxCollider.Cast (new Vector2(0,0), hits);
+		Enemy spotted;
+
+		foreach (RaycastHit2D hit in hits) {
+			if (hit.transform.GetComponent<Component>().tag == "enemy") {
+				spotted = hit.transform.GetComponent<Enemy> ();
+				spotted.enemyDeath ();
+			}
+		}
+	}
+
 	public override void OnHit (GameObject collideObject) {
 		//throw new System.NotImplementedException ();
 		Debug.Log("OnHit activated");
@@ -83,6 +97,7 @@ public class Tower : Interactive {
 	}
 		
 	private void SetCalm() {
+		//boxCollider.enabled = true;
 		GetComponent<SpriteRenderer> ().sprite = calmState;
 		state = State.CALM;
 		currentTowerSlime = 0;
@@ -90,12 +105,14 @@ public class Tower : Interactive {
 	}
 
 	private void SetActivated() {
+		//boxCollider.enabled = false;
 		GetComponent<SpriteRenderer> ().sprite = activatedState;
 		state = State.ACTIVATED;
 		Debug.Log ("State set to " + state);
 	}
 
 	private void SetDeactivated() {
+		//DieUnderTheTower ();
 		state = State.DEACTIVATED;
 		currentTowerSlime = 0;
 		GetComponent<SpriteRenderer> ().sprite = deactivatedState;
