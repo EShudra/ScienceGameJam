@@ -58,7 +58,7 @@ public class Tower : Interactive {
 			Debug.Log ("OnCantMove is Tower was activated");
 	}
 
-	public override void OnHit (string tag) {
+	public override void OnHit (GameObject collideObject) {
 		//throw new System.NotImplementedException ();
 
 	}
