@@ -100,5 +100,10 @@ public class Enemy : Interactive {
 			Bullet bulletObj = collideObject.GetComponent<Bullet>();
 			enemyHP -= bulletObj.damage;
 		}
+
+		if (collideObject.tag == "towerBullet") {
+			TowerBullet bulletObj = collideObject.GetComponent<TowerBullet>();
+			enemyHP -= bulletObj.damage;
+		}
 	}
 }

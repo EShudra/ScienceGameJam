@@ -23,7 +23,6 @@ GameObject:
   - 50: {fileID: 50000014250711646}
   - 114: {fileID: 114000010051527896}
   - 60: {fileID: 60000014190813244}
-  - 95: {fileID: 95000010320072578}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Tower
@@ -115,23 +114,6 @@ PolygonCollider2D:
       - {x: 0.17, y: -1.39}
       - {x: 0.26, y: -1.35}
       - {x: 0.51, y: -1.22}
---- !u!95 &95000010320072578
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011226332310}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6d4fd926b2e8c0e4ea0d9ba330835ecf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114000010051527896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,7 +130,7 @@ MonoBehaviour:
   rb2D: {fileID: 0}
   isMoving: 0
   calmState: {fileID: 21300000, guid: 6a89ffe0d96fba04aa4b1c7c93b638ab, type: 3}
-  activatedState: {fileID: 21300000, guid: 7640381237cd1c8439bb91a6533ec354, type: 3}
+  activatedState: {fileID: 21300000, guid: da98809dfc1620b409018706baa981c1, type: 3}
   deactivatedState: {fileID: 21300000, guid: 9f1f504b555053e4b8359b6b43c7e1bf, type: 3}
   target: {fileID: 114000010180742052, guid: b4b774adc51c53b4184c9b08a133f7b0, type: 2}
   towerSpeed: 5

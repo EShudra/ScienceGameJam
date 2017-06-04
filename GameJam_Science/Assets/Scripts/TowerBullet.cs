@@ -1,23 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bullet : Interactive {
-	public Vector3 target;
-	public int damage = 1;
-	public float bulletSpeed;
-	public Camera cam;
+public class TowerBullet : Bullet {
+	public Vector3 towerTarget;
+	private GameObject[] enemiesList;
 
-	protected bool deadBullet = false;
+	public override void Start() {
+		base.Start ();
+		enemiesList = GameObject.FindGameObjectsWithTag ("enemy");
+		damage = 3;
+		towerTarget = GetClosestEnemy ();
+		target = GetComponent <Heart>().transform.position;
 
-	// Use this for initialization
-	public override void Start () {
-		base.Start();
 		cam = GameObject.FindObjectOfType<Camera> ();
-		target = cam.ScreenToWorldPoint (Input.mousePosition);
-		target.z = 0;
-		Quaternion rotation = Quaternion.LookRotation ((target - this.transform.position));
+		towerTarget.z = 0;
+		Quaternion rotation = Quaternion.LookRotation ((towerTarget - this.transform.position));
 
-		if (this.transform.position.x < target.x) {
+		if (this.transform.position.x < towerTarget.x) {
 			rotation = Quaternion.Euler (Mathf.Abs (rotation.eulerAngles.y - 270), 0, rotation.eulerAngles.x + 270);
 		} else {
 			rotation = Quaternion.Euler (Mathf.Abs (rotation.eulerAngles.y - 270), 0, rotation.eulerAngles.x + 90);
@@ -26,9 +25,26 @@ public class Bullet : Interactive {
 		//Debug.Log(this.transform.rotation.eulerAngles);
 		boxCollider.enabled = false;
 	}
-	
-	// Update is called once per frame
-	protected void Update () {
+
+	private Vector3 GetClosestEnemy () {
+		enemiesList = GameObject.FindGameObjectsWithTag ("enemy");
+		Vector3 closestEnemy = transform.position;
+		float closestDistance = Mathf.Sqrt(closestEnemy.x * closestEnemy.x + closestEnemy.y * closestEnemy.y);
+		float distance;
+
+		foreach (GameObject enemy in enemiesList) {
+			distance = Mathf.Sqrt(enemy.transform.position.x * enemy.transform.position.x + enemy.transform.position.y * enemy.transform.position.y);
+
+			if (distance > closestDistance) {
+				closestEnemy = enemy.transform.position;
+			}
+		}
+
+		return closestEnemy;
+	}
+
+	void Update () {
+
 		if ((this.transform.position - target).sqrMagnitude > float.Epsilon) {
 			RaycastHit2D hit;
 			Vector3 end = Vector3.MoveTowards (this.transform.position, target, bulletSpeed * Time.deltaTime);
@@ -38,7 +54,7 @@ public class Bullet : Interactive {
 			hit = Physics2D.Linecast (this.transform.position, endLinecast);
 			//boxCollider.enabled = true;
 
-			if ((!hit) || (hit.collider.tag == "Heart") || (hit.collider.tag == "bullet")) {
+			if ((!hit) || (hit.collider.tag == "Heart") || (hit.collider.tag == "bullet") || (hit.collider.tag == "Tower") || (hit.collider.tag == "towerBullet")) {
 				//this.transform.Translate (end - this.transform.position);
 				rb2D.position = end;
 			} else {
@@ -52,32 +68,8 @@ public class Bullet : Interactive {
 				attackedEnemy.OnHit (this.gameObject);
 			}
 
-			if  ((hit)&&(hit.collider.tag == "Tower")&&(!deadBullet)) {
-				deadBullet = true;
-				Tower attackedTower = hit.transform.GetComponent<Tower>() as Tower;
-				//this.enabled = false;
-				attackedTower.OnHit (this.gameObject);
-			}
-				
 		} else {
 			BulletDie ();
 		}
-	}
-
-	protected void BulletDie(){
-
-
-			this.GetComponent<Animator> ().SetTrigger ("die");
-			Destroy (this.gameObject, 0.25f);
-	}
-
-	public override void OnCantMove<T> (T component)
-	{
-		//throw new System.NotImplementedException ();
-	}
-
-	public override void OnHit (GameObject collideObject)
-	{
-		//throw new System.NotImplementedException ();
 	}
 }

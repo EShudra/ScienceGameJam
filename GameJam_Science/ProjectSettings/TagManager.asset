@@ -8,6 +8,7 @@ TagManager:
   - Heart
   - bullet
   - Tower
+  - towerBullet
   layers:
   - Default
   - TransparentFX

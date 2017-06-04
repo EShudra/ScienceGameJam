@@ -14,12 +14,15 @@ public class Tower : Interactive {
 	public Sprite activatedState;
 	public Sprite deactivatedState;
 	public Heart target;
-	public float towerSpeed = 1f;
+	public Transform shootingTarget;
+	public float towerSpeed = 1;
+	public float shotCost = 2;
+	public float shootingSpeed = 0.007f;
+	public float shootingCurrentTime = 0;
 
 	private State state = State.CALM;
-	private float towerSlime = 0;
 	private const int towerSlimeMaximum = 40;
-	private bool isCollide = false;
+	private float currentTowerSlime = 0;
 
 	// Use this for initialization
 	public override void Start () {
@@ -41,7 +44,15 @@ public class Tower : Interactive {
 
 		if (state == State.ACTIVATED && !isMoving) {
 			Vector3 end = Vector3.MoveTowards (this.transform.position, target.transform.position, step);
-			isCollide = AttemptMove <Component> ((end - this.transform.position).x, (end - this.transform.position).y);
+			bool isCollide = AttemptMove <Component> ((end - this.transform.position).x, (end - this.transform.position).y);
+		}
+
+		if (state == State.ACTIVATED) {
+			if (Time.time - shootingCurrentTime > shootingSpeed) {
+				shootingCurrentTime = Time.time;
+				Instantiate (Resources.Load ("Prefabs/towerBullet") as GameObject,this.transform.position,Quaternion.identity,null);
+				currentTowerSlime -= shotCost;
+			}
 		}
 	}
 
@@ -49,23 +60,31 @@ public class Tower : Interactive {
 		//throw new System.NotImplementedException ();
 
 		if (state == State.ACTIVATED) {
-			Debug.Log ("OnCantMove is Tower was activated");
-			SetDeactivated ();
+			currentTowerSlime--;
+			Debug.Log ("current tower slime: "+currentTowerSlime);
 		}
+
+		//if (currentTowerSlime == 0)
+		//	SetDeactivated ();
 	}
 
 	public override void OnHit (GameObject collideObject) {
 		//throw new System.NotImplementedException ();
 
-		if (collideObject.tag == "bullet" && (state == State.CALM || state == State.DEACTIVATED)) {
+		if (collideObject.tag == "bullet") {
 			Bullet bullet = collideObject.GetComponent <Bullet>();
+			if (currentTowerSlime == 0 && state == State.CALM) //If the state was CALM and the tower had zero slime, we add half of the maximum amount of slime.
+				currentTowerSlime = towerSlimeMaximum / 2;
+			
+			if (currentTowerSlime != towerSlimeMaximum)
+				currentTowerSlime += bullet.damage;
 
-			if (towerSlime == 0 && state == State.CALM) //If the state was CALM and the tower had zero slime, we add half of the maximum amount of slime.
-				towerSlime = towerSlimeMaximum / 2;
-			towerSlime += bullet.damage;
-			Debug.Log ("current tower slime: "+towerSlime);
+			if (currentTowerSlime == 0)
+				SetDeactivated ();
+			
+			Debug.Log ("current tower slime: "+currentTowerSlime);
 
-			if (towerSlime == towerSlimeMaximum)
+			if (currentTowerSlime == towerSlimeMaximum)
 				SetActivated ();
 		}
 	}
@@ -73,7 +92,7 @@ public class Tower : Interactive {
 	private void SetCalm() {
 		GetComponent<SpriteRenderer> ().sprite = calmState;
 		state = State.CALM;
-		towerSlime = 0;
+		currentTowerSlime = 0;
 		Debug.Log ("State set to " + state);
 	}
 
@@ -85,7 +104,7 @@ public class Tower : Interactive {
 
 	private void SetDeactivated() {
 		state = State.DEACTIVATED;
-		towerSlime = 0;
+		currentTowerSlime = 0;
 		GetComponent<SpriteRenderer> ().sprite = deactivatedState;
 		Debug.Log ("State set to " + state);
 	}
