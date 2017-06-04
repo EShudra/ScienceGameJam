@@ -17,10 +17,15 @@ public class Heart : Interactive {
 	public int slimeMaximum = 1000;
 	private Vector3 destination;
 
+	SpriteRenderer rend;
+	public Sprite heartIdle;
+	public Sprite heartFire;
+
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
 		step = movSpeed / 100;
+		rend = this.GetComponent<SpriteRenderer> ();
 
 		//GameObject slimeBullet = Resources.Load ("Prefabs/slimeBullet") as GameObject; 
 		//Debug.Log (slimeBullet);
@@ -74,6 +79,15 @@ public class Heart : Interactive {
 		}
 
 		//shootingCurrentTime
+
+		if (Input.GetMouseButtonDown(0)) {
+			rend.sprite = heartFire;
+		}
+
+		if (Input.GetMouseButtonUp(0)) {
+			rend.sprite = heartIdle;
+		}
+
 
 		if (Input.GetMouseButton(0)) {
 

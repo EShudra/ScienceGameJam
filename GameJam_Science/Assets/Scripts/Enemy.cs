@@ -13,6 +13,9 @@ public class Enemy : Interactive {
 	public float slowStep = 0.01f;
 	public int enemyHP = 100;
 	public int enemyDamage = 1;
+	public float attackCooldown = 0.3f;
+	public float attackRange = 0.5f;
+	float timeAttackPoint = 0;
 	bool isCollide = false;
 	public int collideMemoryLength = 5;//how much last collisions result is remembered
 	Queue<bool> collideStates = new Queue<bool>();
@@ -68,6 +71,12 @@ public class Enemy : Interactive {
 			Vector3 end;
 			//moving ghost target toward real target
 			//Debug.Log (string.Format("Ghost target:{0}, real target: {1}",ghostTarget, target.transform.position));
+			if (((this.transform.position - target.transform.position).sqrMagnitude < attackRange*attackRange) &&
+				((Time.time-timeAttackPoint) > attackCooldown)){
+				timeAttackPoint = Time.time;
+				target.OnHit (this.gameObject);
+			}
+
 			if ((target.transform.position - ghostTarget).sqrMagnitude < ghostTargetStep) {
 				ghostTarget = target.transform.position;
 			} else {
