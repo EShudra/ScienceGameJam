@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15533207e295b34e86c8b1522050dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movSpeed: 20
+  movSpeed: 40
   boxCollider: {fileID: 0}
   rb2D: {fileID: 0}
   isMoving: 0
@@ -111,10 +111,10 @@ MonoBehaviour:
   ghostTargetStep: 0.05
   ghostTargetDispersion: 15
   slowStep: 0.01
-  enemyHP: 2
-  enemyDamage: 1
+  enemyHP: 10
+  enemyDamage: 200
   attackCooldown: 0.3
-  attackRange: 0.5
+  attackRange: 10
   collideMemoryLength: 5
 --- !u!212 &212000013485489934
 SpriteRenderer:
