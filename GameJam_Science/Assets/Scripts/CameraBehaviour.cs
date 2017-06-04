@@ -10,6 +10,7 @@ public class CameraBehaviour : MonoBehaviour {
 	void Start () {
 		Vector3 trPos = new Vector3 (target.position.x, target.position.y, -10);
 		transform.position = trPos;
+
 	}
 		
 	// Update is called once per frame

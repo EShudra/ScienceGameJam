@@ -7,16 +7,14 @@ public class Bullet : Interactive {
 	public float bulletSpeed;
 	public Camera cam;
 
-	protected bool deadBullet = false;
+	private bool deadBullet = false;
+	Vector3 end;//end of step movement
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
-		cam = GameObject.FindObjectOfType<Camera> ();
-		target = cam.ScreenToWorldPoint (Input.mousePosition);
-		target.z = 0;
+		getTarget ();
 		Quaternion rotation = Quaternion.LookRotation ((target - this.transform.position));
-
 		if (this.transform.position.x < target.x) {
 			rotation = Quaternion.Euler (Mathf.Abs (rotation.eulerAngles.y - 270), 0, rotation.eulerAngles.x + 270);
 		} else {
@@ -26,47 +24,58 @@ public class Bullet : Interactive {
 		//Debug.Log(this.transform.rotation.eulerAngles);
 		boxCollider.enabled = false;
 	}
-	
+
+	public virtual void getTarget(){
+		cam = GameObject.FindObjectOfType<Camera> ();
+		target = cam.ScreenToWorldPoint (Input.mousePosition);
+		target.z = 0;
+	}
+
+	public virtual void updateTarget(){
+		
+	}
+
+	public virtual void executeBulletCollisions(){
+		RaycastHit2D hit;
+		Vector3 endLinecast = Vector3.MoveTowards (this.transform.position, target, bulletSpeed * Time.deltaTime * 2);
+		hit = Physics2D.Linecast (this.transform.position, endLinecast);
+
+		if ((!hit) || (hit.collider.tag == "Heart")
+			|| (hit.collider.tag == "bullet")
+			|| (hit.collider.tag == "exit")) {
+			rb2D.position = end;
+		} else {
+			BulletDie ();
+		}
+
+		if  ((hit)&&(hit.collider.tag == "enemy")&&(!deadBullet)) {
+			deadBullet = true;
+			Enemy attackedEnemy = hit.transform.GetComponent<Enemy>() as Enemy;
+			attackedEnemy.OnHit (this.gameObject);
+		}
+	}
+
+
+
 	// Update is called once per frame
-	protected void Update () {
+	void Update () {
+		updateTarget ();
 		if ((this.transform.position - target).sqrMagnitude > float.Epsilon) {
-			RaycastHit2D hit;
-			Vector3 end = Vector3.MoveTowards (this.transform.position, target, bulletSpeed * Time.deltaTime);
-			Vector3 endLinecast = Vector3.MoveTowards (this.transform.position, target, bulletSpeed * Time.deltaTime * 2);
+			
+			end = Vector3.MoveTowards (this.transform.position, target, bulletSpeed * Time.deltaTime);
 
-			//boxCollider.enabled = false;
-			hit = Physics2D.Linecast (this.transform.position, endLinecast);
-			//boxCollider.enabled = true;
+			executeBulletCollisions ();
 
-			if ((!hit) || (hit.collider.tag == "Heart") || (hit.collider.tag == "bullet")) {
-				//this.transform.Translate (end - this.transform.position);
-				rb2D.position = end;
-			} else {
-				BulletDie ();
-			}
-
-			if  ((hit)&&(hit.collider.tag == "enemy")&&(!deadBullet)) {
-				deadBullet = true;
-				Enemy attackedEnemy = hit.transform.GetComponent<Enemy>() as Enemy;
-				//this.enabled = false;
-				attackedEnemy.OnHit (this.gameObject);
-			}
-
-			if  ((hit)&&(hit.collider.tag == "Tower")&&(!deadBullet)) {
-				deadBullet = true;
-				Tower attackedTower = hit.transform.GetComponent<Tower>() as Tower;
-				//this.enabled = false;
-				attackedTower.OnHit (this.gameObject);
-			}
-				
 		} else {
 			BulletDie ();
 		}
 	}
 
-	protected void BulletDie(){
 
 
+
+
+	void BulletDie(){
 			this.GetComponent<Animator> ().SetTrigger ("die");
 			Destroy (this.gameObject, 0.25f);
 	}

@@ -68,12 +68,16 @@ public class Enemy : Interactive {
 		}
 
 		if (enemyHP <= 0) {
-			GetComponent<Animator> ().SetTrigger ("death");
-			Destroy (this.gameObject, 0.5f);
+			enemyDeath ();
 		}
 
 
 
+	}
+
+	public void enemyDeath(){
+		GetComponent<Animator> ().SetTrigger ("death");
+		Destroy (this.gameObject, 0.5f);
 	}
 
 	public override void OnCantMove<T> (T component)
