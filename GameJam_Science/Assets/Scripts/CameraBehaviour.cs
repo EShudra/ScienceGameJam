@@ -8,13 +8,15 @@ public class CameraBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Vector3 trPos = new Vector3 (target.position.x, target.position.y, -10);
-		transform.position = trPos;
+		//Vector3 trPos = new Vector3 (target.position.x, target.position.y, -10);
+		//transform.position = trPos;
 
 	}
 		
 	// Update is called once per frame
 	void LateUpdate () {
-		transform.position += new Vector3(Input.GetAxisRaw("Mouse X")  * Time.deltaTime * speed, Input.GetAxisRaw("Mouse Y") * Time.deltaTime * speed, 0f);
+		Vector3 mousePos = GameObject.FindObjectOfType<Camera> ().ScreenToWorldPoint(Input.mousePosition);
+		mousePos.z = -10;
+		this.transform.position = Vector3.MoveTowards (this.transform.position, (target.position + mousePos) * 0.5f, speed * Time.deltaTime);
 	}
 }
