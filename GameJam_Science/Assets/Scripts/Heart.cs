@@ -25,6 +25,7 @@ public class Heart : Interactive {
 	SpriteRenderer rend;
 	public Sprite heartIdle;
 	public Sprite[] heartFire;
+	public Sprite heartDeath;
 
 	// Use this for initialization
 	public override void Start () {
@@ -119,6 +120,20 @@ public class Heart : Interactive {
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			slime -= splashCost;
 			instCreepByRadius (creepRadius, creepLineCount);
+		}
+
+		if (slime <= 0) {
+			rend.sprite = heartDeath;
+			this.enabled = false;
+			Canvas cnvs = null;
+			foreach (var item in FindObjectsOfType<Canvas>()) {
+				if (item.name == "endGameCanvas") {
+					cnvs = item;
+					break;
+				}
+			}
+			cnvs.transform.Find ("loseText").gameObject.SetActive (true);
+			cnvs.transform.Find ("restartButton").gameObject.SetActive (true);
 		}
 
 	}
