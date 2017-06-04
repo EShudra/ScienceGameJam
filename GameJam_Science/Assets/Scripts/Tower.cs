@@ -9,6 +9,7 @@ public class Tower : Interactive {
 		DEACTIVATED
 	}
 
+	//public Animation animation;
 	public Sprite calmState;
 	public Sprite activatedState;
 	public Sprite deactivatedState;
@@ -25,6 +26,7 @@ public class Tower : Interactive {
 		base.Start ();
 		target = GameObject.FindObjectOfType<Heart> () as Heart;
 		step = towerSpeed / 100;
+		//animation = GetComponent<Animation>();
 	}
 	
 	// Update is called once per frame
@@ -82,9 +84,9 @@ public class Tower : Interactive {
 	}
 
 	private void SetDeactivated() {
-		GetComponent<SpriteRenderer> ().sprite = deactivatedState;
 		state = State.DEACTIVATED;
 		towerSlime = 0;
+		GetComponent<SpriteRenderer> ().sprite = deactivatedState;
 		Debug.Log ("State set to " + state);
 	}
 }
