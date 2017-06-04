@@ -8,7 +8,13 @@ public class WinCounter : MonoBehaviour {
 	Canvas cnvs;
 	float prevTime;
 	void Start () {
-		cnvs = FindObjectOfType<Canvas>() as Canvas;
+		//cnvs = FindObjectOfType<Canvas>() as Canvas;
+		foreach (var item in FindObjectsOfType<Canvas>()) {
+			if (item.name == "endGameCanvas") {
+				cnvs = item;
+				break;
+			}
+		}
 		//gameObject = cnvs.transform.Find ("countdownText");
 		cnvs.transform.Find ("countdownText").gameObject.SetActive(true);
 		cnvs.transform.Find ("countdownText").GetComponent<Text> ().text = countdown.ToString();

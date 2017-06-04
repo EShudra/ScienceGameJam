@@ -94,7 +94,7 @@ public class Bullet : Interactive {
 
 
 
-	protected void BulletDie(){
+	public virtual void BulletDie(){
 
 			this.GetComponent<Animator> ().SetTrigger ("die");
 			Destroy (this.gameObject, 0.25f);
