@@ -53,6 +53,12 @@ public class Bullet : Interactive {
 			Enemy attackedEnemy = hit.transform.GetComponent<Enemy>() as Enemy;
 			attackedEnemy.OnHit (this.gameObject);
 		}
+
+		if  ((hit)&&(hit.collider.tag == "Tower")&&(!deadBullet)) {
+			deadBullet = true;
+			Tower attackedTower = hit.transform.GetComponent<Tower>() as Tower;
+			attackedTower.OnHit (this.gameObject);
+		}
 	}
 
 
