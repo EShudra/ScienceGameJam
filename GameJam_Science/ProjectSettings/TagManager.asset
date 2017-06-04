@@ -8,6 +8,8 @@ TagManager:
   - Heart
   - bullet
   - exit
+  - ground
+  - creepBullet
   layers:
   - Default
   - TransparentFX
