@@ -19,10 +19,12 @@ public class Tower : Interactive {
 	public float shotCost = 0.01f;
 	public float shootingSpeed = 0.7f;
 	public float shootingCurrentTime = 0;
+	public float currentTowerSlime = 0;
+	public int towerSlimeMaximum = 40;
 
+	private bool shooting = true;
 	private State state = State.CALM;
-	private const int towerSlimeMaximum = 40;
-	private float currentTowerSlime = 0;
+	private GameObject[] enemiesList;
 
 	// Use this for initialization
 	public override void Start () {
@@ -34,6 +36,11 @@ public class Tower : Interactive {
 	
 	// Update is called once per frame
 	void Update () {
+		shooting = true;
+		enemiesList = GameObject.FindGameObjectsWithTag ("enemy");
+		if (enemiesList.Length == 0)
+			shooting = false;
+
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			SetCalm ();
 		} else if (Input.GetKeyDown (KeyCode.Alpha2)) {
@@ -48,10 +55,11 @@ public class Tower : Interactive {
 		}
 
 		if (state == State.ACTIVATED) {
-			if (Time.time - shootingCurrentTime > shootingSpeed && currentTowerSlime > 0) {
+			if (Time.time - shootingCurrentTime > shootingSpeed && currentTowerSlime > 0 && shooting) {
 				shootingCurrentTime = Time.time;
 				Instantiate (Resources.Load ("Prefabs/towerBullet") as GameObject,this.transform.position,Quaternion.identity,null);
 				currentTowerSlime -= shotCost;
+				Debug.Log ("currentTowerSlime: "+currentTowerSlime);
 			}
 		}
 
@@ -93,6 +101,8 @@ public class Tower : Interactive {
 
 			if (currentTowerSlime > 0)
 				SetActivated ();
+
+			Debug.Log ("currentTowerSlime: "+currentTowerSlime);
 		}
 	}
 		

@@ -9,7 +9,8 @@ public class Heart : Interactive {
 	//bullet prefab
 	public GameObject slimeBullet;
 
-	private int slime = 100;
+	public float slime = 1000;
+	public int slimeMaximum = 1000;
 	private Vector3 destination;
 
 	// Use this for initialization
@@ -77,7 +78,7 @@ public class Heart : Interactive {
 
 	public override void OnHit (GameObject collideObject){
 
-		slime--;
+		if (slime > 0) slime--;
 		Debug.Log (string.Format("heart slime: {0}",slime));
 	}
 }
