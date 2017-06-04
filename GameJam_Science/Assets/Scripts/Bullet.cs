@@ -7,8 +7,10 @@ public class Bullet : Interactive {
 	public float bulletSpeed;
 	public Camera cam;
 
+
 	protected bool deadBullet = false;
 	protected Vector3 end;//end of step movement
+
 
 	// Use this for initialization
 	public override void Start () {
@@ -37,12 +39,22 @@ public class Bullet : Interactive {
 
 	public virtual void executeBulletCollisions(){
 		RaycastHit2D hit;
-		Vector3 endLinecast = Vector3.MoveTowards (this.transform.position, target, bulletSpeed * Time.deltaTime * 2);
-		hit = Physics2D.Linecast (this.transform.position, endLinecast);
+		RaycastHit2D[] hitArr = new RaycastHit2D[5];
+		Vector3 endLinecast = Vector3.MoveTowards (this.transform.position, target, bulletSpeed * Time.deltaTime/2);
+		//hit = Physics2D.Linecast (this.transform.position, endLinecast);
+		boxCollider.enabled = true;
+		boxCollider.Cast (target, hitArr, bulletSpeed * Time.deltaTime);
+		boxCollider.enabled = false;
+		/*hit = null;
+		if (hitArr.Length > 0) {
+			hit = hitArr [0];
+		}*/
+		hit = hitArr [0];
 
 		if ((!hit) || (hit.collider.tag == "Heart")
 			|| (hit.collider.tag == "bullet")
-			|| (hit.collider.tag == "exit")) {
+			|| (hit.collider.tag == "exit")
+			|| (hit.collider.tag == "ground")) {
 			rb2D.position = end;
 		} else {
 			BulletDie ();
@@ -81,7 +93,9 @@ public class Bullet : Interactive {
 
 
 
+
 	protected void BulletDie(){
+
 			this.GetComponent<Animator> ().SetTrigger ("die");
 			Destroy (this.gameObject, 0.25f);
 	}

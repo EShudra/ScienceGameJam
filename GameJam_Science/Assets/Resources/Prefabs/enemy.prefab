@@ -108,7 +108,9 @@ MonoBehaviour:
   rb2D: {fileID: 0}
   isMoving: 0
   target: {fileID: 0}
-  ghostTargetDispersion: 0.1
+  ghostTargetStep: 0.05
+  ghostTargetDispersion: 15
+  slowStep: 0.01
   enemyHP: 10
   enemyDamage: 1
   collideMemoryLength: 5
