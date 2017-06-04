@@ -134,11 +134,21 @@ public class Heart : Interactive {
 
 	public override void OnHit (GameObject collideObject){
 
+		if (collideObject.tag == "enemy") {
+			Enemy enm = collideObject.GetComponent<Enemy> () as Enemy;
 
-		if (slime > 0)
-			slime--;
-		else
+			if (slime > 0){
+				slime -= enm.enemyDamage;
+			} else {
+				dead = true;
+			}
+		}
+		if (slime > 0){
+			slime -= 
+		} else {
 			dead = true;
+		}
+		
 		Debug.Log (string.Format("heart slime: {0}",slime));
 
 	}
