@@ -52,6 +52,7 @@ public class Tower : Interactive {
 		if (state == State.ACTIVATED && !isMoving) {
 			Vector3 end = Vector3.MoveTowards (this.transform.position, target.transform.position, step);
 			bool isCollide = AttemptMove <Component> ((end - this.transform.position).x, (end - this.transform.position).y);
+			Debug.Log (isCollide);
 		}
 
 		if (state == State.ACTIVATED) {
@@ -59,7 +60,7 @@ public class Tower : Interactive {
 				shootingCurrentTime = Time.time;
 				Instantiate (Resources.Load ("Prefabs/towerBullet") as GameObject,this.transform.position,Quaternion.identity,null);
 				currentTowerSlime -= shotCost;
-				Debug.Log ("currentTowerSlime: "+currentTowerSlime);
+				//Debug.Log ("currentTowerSlime: "+currentTowerSlime);
 			}
 		}
 
@@ -69,7 +70,7 @@ public class Tower : Interactive {
 
 	public override void OnCantMove<T>(T component) {
 		//throw new System.NotImplementedException ();
-		Debug.Log("OnCantMove activated");
+		//Debug.Log("OnCantMove activated");
 	}
 
 	private void DieUnderTheTower(){
@@ -88,7 +89,7 @@ public class Tower : Interactive {
 
 	public override void OnHit (GameObject collideObject) {
 		//throw new System.NotImplementedException ();
-		Debug.Log("OnHit activated");
+		//Debug.Log("OnHit activated");
 
 		if (collideObject.tag == "bullet") {
 			 Bullet bullet = collideObject.GetComponent <Bullet>();
@@ -102,7 +103,14 @@ public class Tower : Interactive {
 			if (currentTowerSlime > 0)
 				SetActivated ();
 
-			Debug.Log ("currentTowerSlime: "+currentTowerSlime);
+			//Debug.Log ("currentTowerSlime: "+currentTowerSlime);
+		}
+
+		if (collideObject.tag == "creepBullet") {
+			if (currentTowerSlime == 0 && state == State.CALM) {
+				currentTowerSlime += towerSlimeMaximum / 2;
+				SetActivated ();
+			}
 		}
 	}
 		
@@ -111,14 +119,14 @@ public class Tower : Interactive {
 		GetComponent<SpriteRenderer> ().sprite = calmState;
 		state = State.CALM;
 		currentTowerSlime = 0;
-		Debug.Log ("State set to " + state);
+		//Debug.Log ("State set to " + state);
 	}
 
 	private void SetActivated() {
 		//boxCollider.enabled = false;
 		GetComponent<SpriteRenderer> ().sprite = activatedState;
 		state = State.ACTIVATED;
-		Debug.Log ("State set to " + state);
+		//Debug.Log ("State set to " + state);
 	}
 
 	private void SetDeactivated() {
@@ -126,6 +134,6 @@ public class Tower : Interactive {
 		state = State.DEACTIVATED;
 		currentTowerSlime = 0;
 		GetComponent<SpriteRenderer> ().sprite = deactivatedState;
-		Debug.Log ("State set to " + state);
+		//Debug.Log ("State set to " + state);
 	}
 }

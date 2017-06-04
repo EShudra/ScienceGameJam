@@ -16,6 +16,7 @@ public class Enemy : Interactive {
 	bool isCollide = false;
 	public int collideMemoryLength = 5;//how much last collisions result is remembered
 	Queue<bool> collideStates = new Queue<bool>();
+	//bool ghostTargetSwitch();
 	//bool[] collideStates = new bool[collideMemoryLength];
 
 	// Use this for initialization
