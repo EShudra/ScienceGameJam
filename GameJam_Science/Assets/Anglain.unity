@@ -223,7 +223,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 42
+  m_RootOrder: 43
 --- !u!1001 &232773441
 Prefab:
   m_ObjectHideFlags: 0
@@ -1750,7 +1750,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014099780896, guid: 5fc9cb1b69b61d340bfea2f57e0aa3eb, type: 2}
       propertyPath: m_RootOrder
-      value: 43
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 1000010048330566, guid: 5fc9cb1b69b61d340bfea2f57e0aa3eb, type: 2}
       propertyPath: m_Name
