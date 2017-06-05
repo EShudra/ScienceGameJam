@@ -113,9 +113,9 @@ MonoBehaviour:
   ghostTargetDispersion: 15
   slowStep: 0.01
   enemyHP: 10
-  enemyDamage: 1
+  enemyDamage: 10
   attackCooldown: 0.3
-  attackRange: 0.5
+  attackRange: 2
   collideMemoryLength: 5
 --- !u!212 &212000013485489934
 SpriteRenderer:
