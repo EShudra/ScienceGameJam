@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000014099780896}
-  - 61: {fileID: 61000014179323204}
   - 212: {fileID: 212000013170974500}
+  - 60: {fileID: 60000011095671062}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -41,8 +41,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!61 &61000014179323204
-BoxCollider2D:
+--- !u!60 &60000011095671062
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -53,8 +53,29 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.64, y: 0.64}
+  m_Points:
+    m_Paths:
+    - - {x: 0.61, y: -0.29}
+      - {x: 0.61, y: -0.14999999}
+      - {x: 0.52, y: -0.04}
+      - {x: 0.42, y: 0.19999999}
+      - {x: 0.26, y: 0.32999998}
+      - {x: 0.01, y: 0.42}
+      - {x: -0.14, y: 0.42}
+      - {x: -0.37, y: 0.32}
+      - {x: -0.52, y: 0.16}
+      - {x: -0.57, y: 0}
+      - {x: -0.64, y: -0.11}
+      - {x: -0.64, y: -0.25}
+      - {x: -0.58, y: -0.35999998}
+      - {x: -0.42999998, y: -0.65999997}
+      - {x: -0.37, y: -0.71999997}
+      - {x: -0.28, y: -0.77}
+      - {x: -0.14, y: -0.82}
+      - {x: 0.12, y: -0.82}
+      - {x: 0.26999998, y: -0.72999996}
+      - {x: 0.5, y: -0.47}
+      - {x: 0.55, y: -0.42999998}
 --- !u!212 &212000013170974500
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -84,7 +105,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e3669b109443f2847aa9c0f6212530e2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1451a27c9c1d90441b8f6b701cc655bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

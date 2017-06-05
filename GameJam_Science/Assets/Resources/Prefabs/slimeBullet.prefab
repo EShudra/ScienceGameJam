@@ -108,7 +108,7 @@ MonoBehaviour:
   rb2D: {fileID: 0}
   isMoving: 0
   target: {x: 0, y: 0, z: 0}
-  damage: 1
+  damage: 5
   bulletSpeed: 18
   cam: {fileID: 0}
 --- !u!212 &212000013738517078
