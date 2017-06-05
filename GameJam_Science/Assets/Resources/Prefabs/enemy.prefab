@@ -107,14 +107,15 @@ MonoBehaviour:
   boxCollider: {fileID: 0}
   rb2D: {fileID: 0}
   isMoving: 0
+  step: 0.007
   target: {fileID: 0}
   ghostTargetStep: 0.05
   ghostTargetDispersion: 15
   slowStep: 0.01
   enemyHP: 10
-  enemyDamage: 200
+  enemyDamage: 1
   attackCooldown: 0.3
-  attackRange: 10
+  attackRange: 0.5
   collideMemoryLength: 5
 --- !u!212 &212000013485489934
 SpriteRenderer:
