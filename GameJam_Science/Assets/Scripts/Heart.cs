@@ -16,6 +16,7 @@ public class Heart : Interactive {
 	public float slime = 1000;
 	public int slimeMaximum = 1000;
 	private Vector3 destination;
+	private bool dead;
 
 	public float bulletCost = 2;
 	public float splashCost = 25;
@@ -24,6 +25,7 @@ public class Heart : Interactive {
 	SpriteRenderer rend;
 	public Sprite heartIdle;
 	public Sprite[] heartFire;
+	public Sprite heartDeath;
 
 	// Use this for initialization
 	public override void Start () {
@@ -120,6 +122,20 @@ public class Heart : Interactive {
 			instCreepByRadius (creepRadius, creepLineCount);
 		}
 
+		if (slime <= 0) {
+			rend.sprite = heartDeath;
+			this.enabled = false;
+			Canvas cnvs = null;
+			foreach (var item in FindObjectsOfType<Canvas>()) {
+				if (item.name == "endGameCanvas") {
+					cnvs = item;
+					break;
+				}
+			}
+			cnvs.transform.Find ("loseText").gameObject.SetActive (true);
+			cnvs.transform.Find ("restartButton").gameObject.SetActive (true);
+		}
+
 	}
 
 	void instCreepByRadius(float radius, int count){
@@ -150,9 +166,26 @@ public class Heart : Interactive {
 
 	public override void OnHit (GameObject collideObject){
 
+		if (collideObject.tag == "enemy") {
+			Enemy enm = collideObject.GetComponent<Enemy> () as Enemy;
 
-		if (slime > 0) slime--;
+			if (slime > 0){
+				slime -= enm.enemyDamage;
+			} else {
+				dead = true;
+			}
+		}
+		if (slime > 0){
+			slime -= 
+		} else {
+			dead = true;
+		}
+		
 		Debug.Log (string.Format("heart slime: {0}",slime));
+
+	}
+
+	void Death() {
 
 	}
 }
