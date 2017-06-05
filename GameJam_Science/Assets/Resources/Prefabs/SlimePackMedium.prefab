@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef84f3e7393ff447950cad4321ac234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slimeQuantity: 30
+  slimeQuantity: 200
   player: {fileID: 0}
 --- !u!212 &212000013962500026
 SpriteRenderer:
