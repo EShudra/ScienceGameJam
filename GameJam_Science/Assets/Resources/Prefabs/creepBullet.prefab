@@ -84,7 +84,7 @@ Animator:
   m_GameObject: {fileID: 1000012504844012}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: da92e4f96292b784893d2eda0ca6ec0a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 818773b7cb2c65542a1c2fad57eda33c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   boxCollider: {fileID: 0}
   rb2D: {fileID: 0}
   isMoving: 0
+  step: 0.007
   target: {x: 0, y: 0, z: 0}
   damage: 1
   bulletSpeed: 8
@@ -144,7 +145,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 84a48ee5a32acbd4487fa838d0c56bda, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fbeeb46302ee9b942a1025806079edff, type: 3}
   m_Color: {r: 0.8161765, g: 0.50410897, b: 0.50410897, a: 1}
   m_FlipX: 0
   m_FlipY: 0

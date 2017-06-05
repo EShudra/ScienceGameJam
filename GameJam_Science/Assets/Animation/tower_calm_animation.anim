@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: bullet_beam_animation
+  m_Name: tower_calm_animation
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -19,11 +19,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: fbeeb46302ee9b942a1025806079edff, type: 3}
+      value: {fileID: 21300000, guid: 6a89ffe0d96fba04aa4b1c7c93b638ab, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 9aa45be1591e8fe4ea206e5f3d2e7218, type: 3}
-    - time: 0.16666667
-      value: {fileID: 21300000, guid: bb1ade739e3e79240b04f1929496e5c6, type: 3}
+      value: {fileID: 21300000, guid: 8f5bfa81b55851c419540452da443985, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,21 +40,20 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: fbeeb46302ee9b942a1025806079edff, type: 3}
-    - {fileID: 21300000, guid: 9aa45be1591e8fe4ea206e5f3d2e7218, type: 3}
-    - {fileID: 21300000, guid: bb1ade739e3e79240b04f1929496e5c6, type: 3}
+    - {fileID: 21300000, guid: 6a89ffe0d96fba04aa4b1c7c93b638ab, type: 3}
+    - {fileID: 21300000, guid: 8f5bfa81b55851c419540452da443985, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.25
+    m_StopTime: 0.16666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
     m_LoopTime: 1
-    m_LoopBlend: 1
+    m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
     m_LoopBlendPositionXZ: 0

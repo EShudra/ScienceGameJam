@@ -527,11 +527,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1834919832}
+      objectReference: {fileID: 1834919831}
     - target: {fileID: 114000010494021452, guid: e741e8357635a7a40a57ffab9356982e,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: restart
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114000010494021452, guid: e741e8357635a7a40a57ffab9356982e,
         type: 2}
