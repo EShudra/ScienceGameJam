@@ -255,6 +255,7 @@ MonoBehaviour:
   boxCollider: {fileID: 0}
   rb2D: {fileID: 0}
   isMoving: 0
+  step: 0.007
   shootingResetTime: 0.003
   shootingCurrentTime: 0
   slimeBullet: {fileID: 1000010308469922, guid: 1bc6fc750ec5f194588335e86968e364,
@@ -263,6 +264,18 @@ MonoBehaviour:
   creepRadius: 2
   slime: 1000
   slimeMaximum: 1000
+  bulletCost: 2
+  splashCost: 25
+  stepCost: 1
+  heartIdle: {fileID: 21300000, guid: 32fb060555daebb419675488edc8490b, type: 3}
+  heartFire:
+  - {fileID: 21300000, guid: 832de6868201453478ff870435b0479a, type: 3}
+  - {fileID: 21300000, guid: c88957d6b1b70714b87b0b0481b4ea2d, type: 3}
+  - {fileID: 21300000, guid: d7122aa752ad8ef4d886eea3cb54cf59, type: 3}
+  - {fileID: 21300000, guid: e93c42c78906a594490a66cf9be728de, type: 3}
+  - {fileID: 21300000, guid: 81d5ba9bbdb06784a80f544b3640821a, type: 3}
+  - {fileID: 21300000, guid: f6bea29e11a7b1444a50604c63a23157, type: 3}
+  heartDeath: {fileID: 21300000, guid: cc9ef05c517f9f34bbf09ca3c95cf796, type: 3}
 --- !u!114 &114000011492880244
 MonoBehaviour:
   m_ObjectHideFlags: 1
