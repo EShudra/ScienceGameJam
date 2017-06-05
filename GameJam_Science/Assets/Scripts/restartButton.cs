@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor.SceneManagement;
+#endif
 public class restartButton : MonoBehaviour {
 
 	// Use this for initialization
@@ -15,6 +17,9 @@ public class restartButton : MonoBehaviour {
 
 	public void restart(){
 		//SceneManager.LoadScene (SceneManager.GetActiveScene);
-		Application.LoadLevel(0);
+		//Application.LoadLevel(0);
+		#if UNITY_EDITOR
+		EditorSceneManager.LoadScene (0);
+		#endif
 	}
 }
