@@ -17,6 +17,6 @@ public class CameraBehaviour : MonoBehaviour {
 	void LateUpdate () {
 		Vector3 mousePos = GameObject.FindObjectOfType<Camera> ().ScreenToWorldPoint(Input.mousePosition);
 		mousePos.z = -10;
-		this.transform.position = Vector3.MoveTowards (this.transform.position, (target.position + mousePos) * 0.5f, speed * Time.deltaTime);
+		this.transform.position = Vector3.MoveTowards (this.transform.position, (target.position*2.5f + mousePos) /7*2 , speed * Time.deltaTime);
 	}
 }

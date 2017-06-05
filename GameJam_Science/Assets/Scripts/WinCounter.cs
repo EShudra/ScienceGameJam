@@ -16,10 +16,13 @@ public class WinCounter : MonoBehaviour {
 			}
 		}
 		//gameObject = cnvs.transform.Find ("countdownText");
+		FindObjectOfType<Heart> ().step = 0;
 		cnvs.transform.Find ("countdownText").gameObject.SetActive(true);
 		cnvs.transform.Find ("countdownText").GetComponent<Text> ().text = countdown.ToString();
 		prevTime = Time.time;
 	}
+
+
 	
 	// Update is called once per frame
 	void Update () {

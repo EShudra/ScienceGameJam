@@ -6,7 +6,7 @@ public class TowerBullet : Bullet {
 	private GameObject[] enemiesList;
 
 	public override void Start() {
-		player = GameObject.FindObjectOfType<Heart>() as Heart;
+		player = GameObject.FindObjectOfType<Heart>();
 		base.Start ();
 	}
 
@@ -27,16 +27,17 @@ public class TowerBullet : Bullet {
 		float closestDistance = 1000;
 		float distance = 0;
 
-		foreach (GameObject enemy in enemiesList) {
+		foreach (var enemy in enemiesList) {
 			Vector3 enemyPos = enemy.transform.position;
-			distance = Mathf.Pow((playerPos.x - enemyPos.x) * (playerPos.x - enemyPos.x) + (playerPos.y - enemyPos.y) * (playerPos.y - enemyPos.y), 1/2);
+			distance = Mathf.Pow((playerPos.x - enemyPos.x) * (playerPos.x - enemyPos.x) + (playerPos.y - enemyPos.y) * (playerPos.y - enemyPos.y), 0.5f);
 			//Debug.Log (string.Format("({0} - {1})^2 + ({2} - {3})^2",playerPos.x, enemyPos.x, playerPos.y, enemyPos.y));
 
 			if (distance < closestDistance) {
 				closestDistance = distance;
 				closestEnemy = enemyPos;
 				//GameObject.Find ("target_ololo").transform.position = closestEnemy;
-				//Debug.Log ("Distance: "+distance);
+
+
 			}
 		}
 

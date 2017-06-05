@@ -71,6 +71,7 @@ public class Heart : Interactive {
 			(castResult[0].collider.tag == "bullet")||
 			(castResult[0].collider.tag == "Tower")||
 			(castResult[0].collider.tag == "enemy")||
+			(castResult[0].collider.tag == "exit")||
 			(castResult[0].collider.tag == "ground")) &&
 			(!isWallInHits(castResult))) {
 
@@ -175,12 +176,7 @@ public class Heart : Interactive {
 				dead = true;
 			}
 		}
-		if (slime > 0){
-			slime -= 
-		} else {
-			dead = true;
-		}
-		
+
 		Debug.Log (string.Format("heart slime: {0}",slime));
 
 	}
