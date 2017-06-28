@@ -11,7 +11,10 @@ public class SlimePack : MonoBehaviour {
 
 	void Update() {
 		if ((player.transform.position - this.transform.position).sqrMagnitude < 0.5f) {
-			player.slime += slimeQuantity;
+			if ((player.slime+slimeQuantity) < player.slimeMaximum)
+				player.slime += slimeQuantity;
+			else
+				player.slime = player.slimeMaximum;
 			Destroy (this.gameObject);
 		}
 	}

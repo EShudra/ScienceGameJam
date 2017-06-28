@@ -38,6 +38,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010573241850}
   - 212: {fileID: 212000011090897128}
+  - 95: {fileID: 95000013685710134}
   - 50: {fileID: 50000013157361518}
   - 114: {fileID: 114000012827902384}
   - 60: {fileID: 60000013569738360}
@@ -185,6 +186,23 @@ PolygonCollider2D:
       - {x: 0.17, y: -1.39}
       - {x: 0.26, y: -1.35}
       - {x: 0.51, y: -1.22}
+--- !u!95 &95000013685710134
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011467911286}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6d4fd926b2e8c0e4ea0d9ba330835ecf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114000011595305176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,6 +305,7 @@ MonoBehaviour:
   boxCollider: {fileID: 0}
   rb2D: {fileID: 0}
   isMoving: 0
+  step: 0.007
   calmState: {fileID: 21300000, guid: 6a89ffe0d96fba04aa4b1c7c93b638ab, type: 3}
   activatedState: {fileID: 21300000, guid: da98809dfc1620b409018706baa981c1, type: 3}
   deactivatedState: {fileID: 21300000, guid: 9f1f504b555053e4b8359b6b43c7e1bf, type: 3}

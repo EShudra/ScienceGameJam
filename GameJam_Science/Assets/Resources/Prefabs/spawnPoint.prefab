@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startSpawnPeriod: 2
   periodIncrement: 0
-  enemiesPerSpawn: 1
+  enemiesPerSpawn: 2
   enemiesIncrement: 0.1
   spawnArea: 1.2
 --- !u!212 &212000011223874656

@@ -41,13 +41,13 @@ public class Tower : Interactive {
 		if (enemiesList.Length == 0)
 			shooting = false;
 
-		if (Input.GetKeyDown (KeyCode.Alpha1)) {
+		/*if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			SetCalm ();
 		} else if (Input.GetKeyDown (KeyCode.Alpha2)) {
 			SetActivated ();
 		} else if (Input.GetKeyDown (KeyCode.Alpha3)) {
 			SetDeactivated ();
-		}
+		}*/
 
 		if (state == State.ACTIVATED && !isMoving) {
 			Vector3 end = Vector3.MoveTowards (this.transform.position, target.transform.position, step);
@@ -56,10 +56,10 @@ public class Tower : Interactive {
 		}
 
 		if (state == State.ACTIVATED) {
-			if (Time.time - shootingCurrentTime > shootingSpeed && this.currentTowerSlime > 0 && shooting) {
+			if (Time.time - shootingCurrentTime > shootingSpeed && currentTowerSlime > 0 && shooting) {
 				shootingCurrentTime = Time.time;
 				Instantiate (Resources.Load ("Prefabs/towerBullet") as GameObject,this.transform.position,Quaternion.identity,null);
-				this.currentTowerSlime -= shotCost;
+				currentTowerSlime -= shotCost;
 				//Debug.Log ("currentTowerSlime: "+currentTowerSlime);
 			}
 		}
@@ -94,21 +94,21 @@ public class Tower : Interactive {
 		if (collideObject.tag == "bullet") {
 			 Bullet bullet = collideObject.GetComponent <Bullet>();
 
-			if (this.currentTowerSlime == 0 && state == State.CALM) //If the state was CALM and the tower had zero slime, we add half of the maximum amount of slime.
-				this.currentTowerSlime += towerSlimeMaximum / 2;
+			if (currentTowerSlime == 0 && state == State.CALM) //If the state was CALM and the tower had zero slime, we add half of the maximum amount of slime.
+				currentTowerSlime += towerSlimeMaximum / 2;
 			
-			if (this.currentTowerSlime != towerSlimeMaximum)
-				this.currentTowerSlime += bullet.damage;
+			if ((currentTowerSlime+bullet.damage) <= towerSlimeMaximum)
+				currentTowerSlime += bullet.damage;
 
-			if (this.currentTowerSlime > 0)
+			if (currentTowerSlime > 0)
 				SetActivated ();
 
 			//Debug.Log ("currentTowerSlime: "+currentTowerSlime);
 		}
 
 		if (collideObject.tag == "creepBullet") {
-			if (this.currentTowerSlime == 0 && state == State.CALM) {
-				this.currentTowerSlime += towerSlimeMaximum / 2;
+			if (currentTowerSlime == 0 && state == State.CALM) {
+				currentTowerSlime += towerSlimeMaximum / 2;
 				SetActivated ();
 			}
 		}
@@ -118,22 +118,24 @@ public class Tower : Interactive {
 		//boxCollider.enabled = true;
 		GetComponent<SpriteRenderer> ().sprite = calmState;
 		state = State.CALM;
-		this.currentTowerSlime = 0;
+		currentTowerSlime = 0;
 		//Debug.Log ("State set to " + state);
 	}
 
 	private void SetActivated() {
 		//boxCollider.enabled = false;
+		GetComponent<Animator>().SetTrigger("activated");
 		GetComponent<SpriteRenderer> ().sprite = activatedState;
 		state = State.ACTIVATED;
-		//Debug.Log ("State set to " + state);
+		Debug.Log ("State set to " + state);
 	}
 
 	private void SetDeactivated() {
 		//DieUnderTheTower ();
-		state = State.DEACTIVATED;
-		this.currentTowerSlime = 0;
+		GetComponent<Animator>().SetTrigger("deactivated");
 		GetComponent<SpriteRenderer> ().sprite = deactivatedState;
-		//Debug.Log ("State set to " + state);
+		state = State.DEACTIVATED;
+		currentTowerSlime = 0;
+		Debug.Log ("State set to " + state);
 	}
 }
